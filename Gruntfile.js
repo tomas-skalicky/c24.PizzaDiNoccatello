@@ -12,6 +12,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
+    clean: ["dist"],
     jshint: {
       files: ["Gruntfile.js", "dev/scripts/**/*.js", "test/**/*.js"],
       options: {
@@ -28,7 +29,7 @@ module.exports = function (grunt) {
         options: {
           mainConfigFile: "dev/scripts/main.js",
           name: "main",
-          out: "dist/<%= pkg.name %>.js",
+          out: "dist/main.js",
           optimize: "uglify",
           preserveLicenseComments: false,
           useStrict: true,
@@ -69,7 +70,7 @@ module.exports = function (grunt) {
     },
   });
 
-  grunt.registerTask("default", ["test", "requirejs"]);
+  grunt.registerTask("default", ["test", "clean", "requirejs"]);
   grunt.registerTask("server", ["default", "connect:devLive", "open:devLive", "watch:devLive"]);
   grunt.registerTask("test", ["jshint"]);
 

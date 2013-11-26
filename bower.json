@@ -1,4 +1,5 @@
 {
+  "name": "Pizza-Di-Nocatello",
   "dependencies": {
     "requirejs": "~2.1.9",
     "knockout.js": "~3.0.0",
