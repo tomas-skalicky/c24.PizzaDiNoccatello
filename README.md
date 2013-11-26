@@ -11,16 +11,17 @@ Clone the repository, then load all node packages by executing the following com
 
 Use the following commands to build/hint/minify/test etc:
 
-	grunt              -- hint, minify, bundle amd modules, copy to dist (== creates the production version)
+	grunt              -- hint, test, minify, bundle amd modules, copy to dist (== creates the production version)
+	grunt server       -- everything from the above tasks, then run development server and open browser with live reload
 	grunt test         -- hint, then run tests (tests are not implemented yet)
 
 Next TODOs: Implement tests (Kharma, Jasmine), HTML transformation dev->dist.
 
 -----
 
-## TEMP: How the infrastructure for this project has been built
+### TEMP: How the infrastructure for this project has been built
 
-**This section is for our own record, it will be deleted after the project infrastructure has reached a certain level of maturity.**
+***This section is for our own record, it will be deleted after the project infrastructure has reached a certain level of maturity.***
 
 Create an empty folder and cd into it, then create `package.json` by executing (and answering all questions):
 

@@ -70,7 +70,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask("default", ["test", "requirejs"]);
-  grunt.registerTask("server", ["jshint", "requirejs", "connect:devLive", "open:devLive", "watch:devLive"]);
+  grunt.registerTask("server", ["default", "connect:devLive", "open:devLive", "watch:devLive"]);
   grunt.registerTask("test", ["jshint"]);
 
 };
