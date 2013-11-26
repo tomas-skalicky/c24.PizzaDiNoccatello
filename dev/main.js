@@ -4,6 +4,7 @@ require.config({
       "version": (new Date()).toString()
     }
   },
+  "baseUrl": "scripts/",
   "map": {
     "*": {
       "text": "../bower_components/text/text",

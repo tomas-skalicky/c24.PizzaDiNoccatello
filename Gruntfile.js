@@ -4,6 +4,8 @@ var mountFolder = function (connect, dir) {
   return connect.static(require("path").resolve(dir));
 };
 
+var jmTemplate = require('grunt-template-jasmine-requirejs');
+
 module.exports = function (grunt) {
   "use strict";
 
@@ -14,7 +16,7 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON("package.json"),
     clean: ["dist"],
     jshint: {
-      files: ["Gruntfile.js", "dev/scripts/**/*.js", "test/**/*.js"],
+      files: ["Gruntfile.js", "dev/main.js", "dev/scripts/**/*.js", "test/**/*.js"],
       options: {
         // options here to override JSHint defaults
         globals: {
@@ -27,10 +29,10 @@ module.exports = function (grunt) {
       dist: {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         options: {
-          mainConfigFile: "dev/scripts/main.js",
-          name: "main",
+          include: ["app", "dataService", "page1", "page2"],
+          mainConfigFile: "main.dist.js",
           out: "dist/main.js",
-          optimize: "uglify",
+          optimize: "none", // "uglify": (default), "uglify2" or "none"
           preserveLicenseComments: false,
           useStrict: true,
           wrap: false
@@ -45,7 +47,7 @@ module.exports = function (grunt) {
         options: {
           livereload: LIVERELOAD_PORT
         },
-        files: ["Gruntfile.js" ,"dev/scripts/**/*.js", "dev/**/*.html"],
+        files: ["Gruntfile.js", "dev/main.js", "dev/scripts/**/*.js", "test/**/*.js", "dev/**/*.html"],
         tasks: ["default"]
       }
     },
@@ -68,10 +70,22 @@ module.exports = function (grunt) {
         path: "http://localhost:<%= connect.options.port %>"
       }
     },
+    jasmine: {
+      tt: {
+        //src: 'dev/scripts/**/*.js',
+        options: {
+          specs: 'test/*Spec.js',
+          template: jmTemplate,
+          templateOptions: {
+            requireConfigFile: 'test/main.js'
+          }
+        }
+      }
+    }
   });
 
   grunt.registerTask("default", ["test", "clean", "requirejs"]);
   grunt.registerTask("server", ["default", "connect:devLive", "open:devLive", "watch:devLive"]);
-  grunt.registerTask("test", ["jshint"]);
+  grunt.registerTask("test", ["jshint", "jasmine"]);
 
 };
