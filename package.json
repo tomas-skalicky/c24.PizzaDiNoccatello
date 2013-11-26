@@ -1,6 +1,10 @@
 {
   "name": "Pizza-Di-Nocatello",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CHECK24/c24.PizzaDiNoccatello.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.2",
     "bower": "~1.2.7",
