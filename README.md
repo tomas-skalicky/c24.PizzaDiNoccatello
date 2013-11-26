@@ -30,65 +30,25 @@ You might want to convert the line endings to Windows (CRLF) as they get generat
 
 Next, install local grunt and bower versions by executing the following commands:
 
-    npm install grunt --save-dev
     npm install grunt-cli --save-dev
+    npm install grunt --save-dev
     npm install bower --save-dev
 
 The `--save-dev` argument will tell npm to add the dependencies to the `devDependency` section in the `package.json` document.
 
-Next, install a few basic grunt plugins with npm:
+Next, install the used grunt plugins and other packages with npm:
 
     npm install grunt-contrib-uglify --save-dev
     npm install grunt-contrib-jshint --save-dev
     npm install grunt-contrib-watch --save-dev
     npm install grunt-contrib-concat --save-dev
+    npm install grunt-requirejs --save-dev
+    npm install connect-livereload --save-dev
+    npm install grunt-open --save-dev
+    npm install matchdep --save-dev
+    npm install grunt-contrib-connect --save-dev
 
-Then, you can add a file named `Gruntfile.js` into the root of your project that uses these plugins:
-
-    module.exports = function(grunt) {
-
-      grunt.initConfig({
-        pkg: grunt.file.readJSON("package.json"),
-        jshint: {
-          files: ["Gruntfile.js", "dev/scripts/**/*.js", "test/**/*.js"],
-          options: {
-            // options here to override JSHint defaults
-            globals: {
-              console: true,
-              document: true
-            }
-          }
-        },
-        requirejs: {
-          dist: {
-            // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
-            options: {
-              mainConfigFile: "dev/scripts/main.js",
-              name: "main",
-              out: "dist/<%= pkg.name %>.js",
-              optimize: "uglify",
-              preserveLicenseComments: false,
-              useStrict: true,
-              wrap: true
-            }
-          }
-        },
-        watch: {
-          files: ["<%= jshint.files %>"],
-          tasks: ["jshint"]
-        }
-      });
-
-      grunt.loadNpmTasks("grunt-contrib-uglify");
-      grunt.loadNpmTasks("grunt-contrib-jshint");
-      grunt.loadNpmTasks("grunt-contrib-watch");
-      grunt.loadNpmTasks("grunt-contrib-concat");
-      grunt.loadNpmTasks("grunt-requirejs");
-
-      grunt.registerTask("test", ["jshint"]);
-      grunt.registerTask("default", ["jshint", "requirejs"]);
-
-    };
+Then, you can add a file named `Gruntfile.js` into the root of your project that uses these plugins (see `Gruntfile.js`).
 
 Next, place a file called `.bowerrc` into the project root folder containing the following content:
 

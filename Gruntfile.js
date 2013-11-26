@@ -1,4 +1,14 @@
-module.exports = function(grunt) {
+var LIVERELOAD_PORT = 35729;
+var lrSnippet = require("connect-livereload")({port: LIVERELOAD_PORT});
+var mountFolder = function (connect, dir) {
+  return connect.static(require("path").resolve(dir));
+};
+
+module.exports = function (grunt) {
+  "use strict";
+
+  // load all grunt tasks:
+  require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
@@ -27,18 +37,47 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      options: {
+        nospawn: true
+      },
       files: ["<%= jshint.files %>"],
-      tasks: ["jshint"]
-    }
+      tasks: ["jshint"],
+      livereload: {
+        options: {
+          livereload: LIVERELOAD_PORT
+        },
+        files: [
+          "dev/**/*.html",
+          "dev/scripts/**/*.js"
+        ]
+      }
+    },
+    connect: {
+      options: {
+        port: 8080,
+        // change this to 0.0.0.0 to access the server from outside
+        hostname: "localhost"
+      },
+      livereload: {
+        options: {
+          middleware: function (connect) {
+            return [
+              mountFolder(connect, "dev"),
+              lrSnippet
+            ];
+          }
+        }
+      }
+    },
+    open: {
+      server: {
+        path: "http://localhost:<%= connect.options.port %>"
+      }
+    },
   });
 
-  grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.loadNpmTasks("grunt-requirejs");
-
-  grunt.registerTask("test", ["jshint"]);
   grunt.registerTask("default", ["jshint", "requirejs"]);
+  grunt.registerTask("server", ["connect:livereload", "open", "watch"]);
+  grunt.registerTask("test", ["jshint"]);
 
 };
