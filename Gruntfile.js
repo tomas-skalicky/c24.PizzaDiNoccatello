@@ -38,18 +38,14 @@ module.exports = function (grunt) {
     },
     watch: {
       options: {
-        nospawn: true
+        spawn: false
       },
-      files: ["<%= jshint.files %>"],
-      tasks: ["jshint"],
-      livereload: {
+      devLive: {
         options: {
           livereload: LIVERELOAD_PORT
         },
-        files: [
-          "dev/**/*.html",
-          "dev/scripts/**/*.js"
-        ]
+        files: ["Gruntfile.js" ,"dev/scripts/**/*.js", "dev/**/*.html"],
+        tasks: ["default"]
       }
     },
     connect: {
@@ -58,26 +54,23 @@ module.exports = function (grunt) {
         // change this to 0.0.0.0 to access the server from outside
         hostname: "localhost"
       },
-      livereload: {
+      devLive: {
         options: {
           middleware: function (connect) {
-            return [
-              mountFolder(connect, "dev"),
-              lrSnippet
-            ];
+            return [mountFolder(connect, "dev"), lrSnippet];
           }
         }
       }
     },
     open: {
-      server: {
+      devLive: {
         path: "http://localhost:<%= connect.options.port %>"
       }
     },
   });
 
-  grunt.registerTask("default", ["jshint", "requirejs"]);
-  grunt.registerTask("server", ["connect:livereload", "open", "watch"]);
+  grunt.registerTask("default", ["test", "requirejs"]);
+  grunt.registerTask("server", ["jshint", "requirejs", "connect:devLive", "open:devLive", "watch:devLive"]);
   grunt.registerTask("test", ["jshint"]);
 
 };
