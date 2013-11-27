@@ -1,7 +1,8 @@
 require.config({
   "config": {
     "*": {
-      "version": (new Date()).toString()
+      "version": (new Date()).getTime(),
+      "environment": "development"
     }
   },
   "baseUrl": "scripts/",
@@ -16,7 +17,6 @@ require.config({
 });
 
 require(["module", "app", "knockout", "knockout-amd-helpers"], function(module, App, ko) {
-  console.log("App started.");
   ko.amdTemplateEngine.defaultPath = "../templates";
   ko.amdTemplateEngine.defaultSuffix = ".html";
 

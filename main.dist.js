@@ -1,7 +1,8 @@
 require.config({
   "config": {
     "*": {
-      "version": (new Date()).toString()
+      "version": (new Date()).getTime(),
+      "environment": "production"
     }
   },
   "baseUrl": "dev/scripts/",

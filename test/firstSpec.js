@@ -1,4 +1,4 @@
-require([], function () {
+require(["q"], function (Q) {
 
   describe("When I have two numbers x and y,", function() {
     var x, y;

@@ -1,10 +1,11 @@
 require.config({
   "config": {
     "*": {
-      "version": (new Date()).toString()
+      "version": (new Date()).getTime(),
+      "environment": "test"
     }
   },
-  "baseUrl": "../dev/scripts/",
+  "baseUrl": "dev/scripts/",
   "map": {
     "*": {
       "text": "../bower_components/text/text",
