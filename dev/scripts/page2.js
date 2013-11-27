@@ -7,7 +7,7 @@ define(["knockout"], function (ko) {
         return new Page2ViewModel();
     }
 
-    this.message = ko.observable("This message comes from Page2ViewModel.");
+    this.message = ko.observable("This message comes from Page2ViewModel..");
   };
 
   return Page2ViewModel;

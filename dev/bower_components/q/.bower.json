@@ -1,0 +1,14 @@
+{
+  "name": "q",
+  "homepage": "https://github.com/kriskowal/q",
+  "version": "0.9.3",
+  "_release": "0.9.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.9.3",
+    "commit": "4f5a18d46eb4adf4d63dfe9438de4321a9ccf697"
+  },
+  "_source": "git://github.com/kriskowal/q.git",
+  "_target": "0.9.3",
+  "_originalSource": "q"
+}

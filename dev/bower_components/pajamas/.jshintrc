@@ -1,0 +1,43 @@
+{
+  "camelcase" : true
+, "eqeqeq"    : true
+, "forin"     : true
+, "immed"     : true
+, "latedef"   : true
+, "newcap"    : true
+, "noarg"     : true
+, "nonew"     : true
+, "quotmark"  : "single"
+, "undef"     : true
+, "unused"    : true
+, "trailing"  : true
+, "asi"       : true
+, "eqnull"    : true
+, "evil"      : true
+, "expr"      : true
+, "laxbreak"  : true
+, "laxcomma"  : true
+, "sub"       : true
+, "browser"   : true
+, "onevar"    : true
+
+, "globals" : {
+    "QUnit"   : true
+  , "define"  : true
+  , "module"  : true
+  , "exports" : true
+  , "require" : true
+  , "ender"   : true
+
+  , "pj"          : true
+  , "FakeXHR"     : true
+  , "$"           : true
+  , "module"      : true
+  , "test"        : true
+  , "asyncTest"   : true
+  , "ok"          : true
+  , "deepEqual"   : true
+  , "strictEqual" : true
+  , "start"       : true
+  }
+}

@@ -73,22 +73,16 @@ module.exports = function (grunt) {
       dev: {
         path: "http://localhost:<%= connect.dev.options.port %>"
       }
-    // },
-    // jasmine: {
-    //   unit: {
-    //     options: {
-    //       specs: 'test/**/*Spec.js',
-    //       template: jmTemplate,
-    //       templateOptions: {
-    //         requireConfigFile: 'test/main.test.js'
-    //       }
-    //     }
-    //   }
+    },
+    karma: {
+      unit: {
+        configFile: "karma.conf.js"
+      }
     }
   });
 
   grunt.registerTask("default", ["test", "clean", "requirejs"]);
   grunt.registerTask("server", ["default", "connect:dev", "open:dev", "watch:dev"]);
-  grunt.registerTask("test", ["jshint", "connect:test"]);
+  grunt.registerTask("test", ["jshint", "karma:unit"]);
 
 };

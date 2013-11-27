@@ -1,4 +1,4 @@
-require(["q", "squire"], function (Q, Squire) {
+define(["q", "squire"], function (Q, Squire) {
 
   describe("DataService", function () {
 
