@@ -50,7 +50,7 @@ define(["pajamas", "q"], function (pj, Q) {
       return webGet("basket/" + id); // We do not cache the basket
     },
     setBasket: function (basket) {
-      return webPost("basket/" + basket.id, basket); // We do not cache the basket
+      return webPost("basket", basket); // We do not cache the basket
     }
   };
 

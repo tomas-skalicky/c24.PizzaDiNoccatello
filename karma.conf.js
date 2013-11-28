@@ -16,9 +16,8 @@ module.exports = function(config) {
     files: [
       'dev/bower_components/jasmine.async/lib/jasmine.async.js',
       'main.test.js',
-      {pattern: 'test/*Spec.js', included: false},
-      {pattern: 'test/*Helper.js', included: false},
-      {pattern: 'dev/scripts/*.js', included: false},
+      {pattern: 'test/**/*Spec.js', included: false},
+      {pattern: 'dev/scripts/**/*.js', included: false},
       {pattern: 'dev/bower_components/text/text.js', included: false},
       {pattern: 'dev/bower_components/knockout.js/knockout.js', included: false},
       {pattern: 'dev/bower_components/knockout-amd-helpers/build/knockout-amd-helpers.js', included: false},
@@ -29,7 +28,7 @@ module.exports = function(config) {
 
 
     // list of files to exclude
-    exclude: ['main.dist.js'],
+    //exclude: ['main.dist.js'],
 
 
     // test results reporter to use
