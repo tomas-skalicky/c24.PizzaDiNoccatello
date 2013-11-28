@@ -14,12 +14,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'dev/bower_components/jasmine.async/lib/jasmine.async.js',
       'main.test.js',
       {pattern: 'test/*Spec.js', included: false},
+      {pattern: 'test/*Helper.js', included: false},
+      {pattern: 'dev/scripts/*.js', included: false},
       {pattern: 'dev/bower_components/text/text.js', included: false},
       {pattern: 'dev/bower_components/knockout.js/knockout.js', included: false},
       {pattern: 'dev/bower_components/knockout-amd-helpers/build/knockout-amd-helpers.js', included: false},
-      {pattern: 'dev/bower_components/pajamas/dist/pajamas.js', included: false},
+      {pattern: 'dev/bower_components/pajamas/src/pajamas.js', included: false},
       {pattern: 'dev/bower_components/q/q.js', included: false},
       {pattern: 'dev/bower_components/squire/src/Squire.js', included: false}
     ],

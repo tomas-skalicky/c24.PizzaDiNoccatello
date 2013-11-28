@@ -1,17 +1,10 @@
-define([], function() {
+define(["pajamas"], function (pj) {
 
-  var cache = {},
-      DataService;
+  var cache = {};
 
-  DataService = function () {
-    if (!(this instanceof DataService)) {
-      return new DataService();
-    }
-  };
-
-  DataService.prototype = {
+  return {
     getPizzas: function () {
-      // Return promises!
+      return pj({ url: "http://localhost:3000/api/pizzas", dataType: "json", type: "GET" });
     },
     getSizes: function () {
       // Return promises!
@@ -29,7 +22,5 @@ define([], function() {
       // Return promises!
     }
   };
-
-  return DataService;
 
 });

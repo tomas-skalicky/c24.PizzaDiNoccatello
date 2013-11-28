@@ -1,32 +1,30 @@
-var tests = [];
-for (var file in window.__karma__.files) {
-  if (window.__karma__.files.hasOwnProperty(file)) {
-    if (/Spec\.js$/.test(file)) {
-      tests.push(file);
-    }
-  }
-}
+var karma  = window.__karma__,
+    tests  = Object.keys(karma.files).filter(function (file) { return /Spec\.js$/.test(file); }),
+    config = {
+      "version": (new Date()).getTime(),
+      "environment": "test"
+    };
 
 require.config({
   "config": {
-    "*": {
-      "version": (new Date()).getTime(),
-      "environment": "test"
-    }
+    "*": config
   },
   "baseUrl": "/base/dev/scripts/",
-  "map": {
-    "*": {
-      "text": "../bower_components/text/text",
-      "knockout": "../bower_components/knockout.js/knockout",
-      "knockout-amd-helpers": "../bower_components/knockout-amd-helpers/build/knockout-amd-helpers",
-      "pajamas": "../bower_components/pajamas/dist/pajamas",
-      "q": "../bower_components/q/q",
-      "squire": "../bower_components/squire/src/Squire"
-    }
-  },
-  // ask Require.js to load these files (all our tests)
-  "deps": tests,
-  // start test run, once Require.js is done
-  "callback": window.__karma__.start
+  "paths": {
+    "text": "../bower_components/text/text",
+    "knockout": "../bower_components/knockout.js/knockout",
+    "knockout-amd-helpers": "../bower_components/knockout-amd-helpers/build/knockout-amd-helpers",
+    "pajamas": "../bower_components/pajamas/src/pajamas",
+    "q": "../bower_components/q/q",
+    "squire": "../bower_components/squire/src/Squire",
+    "dataServiceHelper": "../../test/dataServiceHelper"
+  }
+});
+
+define("module", [], function() {
+  return { config: function () { return config; } };
+});
+
+require(tests, function () {
+  karma.start();
 });
