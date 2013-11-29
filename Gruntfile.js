@@ -75,8 +75,14 @@ module.exports = function (grunt) {
       }
     },
     karma: {
-      unit: {
+      options: {
         configFile: "karma.conf.js"
+      },
+      unit: {
+        exclude: ["test/integration/**/*.js"]
+      },
+      integration: {
+        exclude: ["test/unit/**/*.js"]
       }
     }
   });
@@ -84,5 +90,6 @@ module.exports = function (grunt) {
   grunt.registerTask("default", ["test", "clean", "requirejs"]);
   grunt.registerTask("server", ["default", "connect:dev", "open:dev", "watch:dev"]);
   grunt.registerTask("test", ["jshint", "karma:unit"]);
+  grunt.registerTask("integration", ["jshint", "karma:integration"]);
 
 };

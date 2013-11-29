@@ -1,7 +1,31 @@
-define([], function() {
+define(["pajamas", "q"], function (pj, Q) {
 
-  var cache = {},
-      DataService;
+  var DataService,
+      baseUri = "http://localhost:3000/api/",
+      cache = {};
+
+  function getOrSetCachedItem (key, createFunc) {
+    var entity = cache[key];
+    if (entity && Q.isPromise(entity)) {
+      if (!Q.isRejected(entity)) {
+        return entity;
+      } else {
+        delete cache[entity];
+      }
+    }
+
+    entity = createFunc();
+    cache[key] = entity;
+    return entity;
+  }
+
+  function webGet (entityName) {
+    return pj({ url: baseUri + entityName, dataType: "json", type: "GET" });
+  }
+
+  function webPost (entityName, entity) {
+    return pj({ url: baseUri + entityName, data: entity, dataType: "json", type: "POST" });
+  }
 
   DataService = function () {
     if (!(this instanceof DataService)) {
@@ -11,22 +35,22 @@ define([], function() {
 
   DataService.prototype = {
     getPizzas: function () {
-      // Return promises!
+      return getOrSetCachedItem("pizzas", function () { return webGet("pizzas"); });
     },
     getSizes: function () {
-      // Return promises!
+      return getOrSetCachedItem("sizes", function () { return webGet("sizes"); });
     },
     getDoughs: function () {
-      // Return promises!
+      return getOrSetCachedItem("basepizzas", function () { return webGet("basepizzas"); });
     },
     getIngredients: function () {
-      // Return promises!
+      return getOrSetCachedItem("ingredients", function () { return webGet("ingredients"); });
     },
     getBasket: function (id) {
-      // Return promises!
+      return webGet("basket/" + id); // We do not cache the basket
     },
     setBasket: function (basket) {
-      // Return promises!
+      return webPost("basket", basket); // We do not cache the basket
     }
   };
 
