@@ -13,6 +13,25 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     clean: ["dist"],
+    replace: {
+      dist: {
+        src: ["dev/index.html"],
+        dest: "dist/index.html",
+        replacements: [{ 
+          from: "<script data-main=\"main.dev\" src=\"bower_components/requirejs/require.js\"></script>",
+          to: "<script src=\"main.js\"></script>"
+        }, {
+          from: "<script src=\"//localhost:35729/livereload.js\"></script>",
+          to: ""
+        }]
+      }
+    },
+    prettify: {
+      one: {
+        src: "dist/index.html",
+        dest: "dist/index.html"
+      }
+    },
     jshint: {
       files: ["Gruntfile.js", "dev/main.dev.js", "dev/scripts/**/*.js", "test/**/*.js"],
       options: {
@@ -27,10 +46,10 @@ module.exports = function (grunt) {
       dist: {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         options: {
-          include: ["app"],
+          include: ["app", "page1", "page2"],
           mainConfigFile: "main.dist.js",
           out: "dist/main.js",
-          optimize: "none", // "uglify": (default), "uglify2" or "none"
+          optimize: "uglify", // possible values: "uglify" (default), "uglify2" or "none"
           preserveLicenseComments: false,
           useStrict: true,
           wrap: false
@@ -87,9 +106,9 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask("default", ["test", "clean", "requirejs"]);
+  grunt.registerTask("default", ["unit", "clean", "replace", "prettify", "requirejs"]);
   grunt.registerTask("server", ["default", "connect:dev", "open:dev", "watch:dev"]);
-  grunt.registerTask("test", ["jshint", "karma:unit"]);
+  grunt.registerTask("unit", ["jshint", "karma:unit"]);
   grunt.registerTask("integration", ["jshint", "karma:integration"]);
 
 };

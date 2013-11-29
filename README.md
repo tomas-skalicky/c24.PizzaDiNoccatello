@@ -11,8 +11,9 @@ Clone the repository, then load all node packages by executing the following com
 
 Use the following commands to build/hint/minify/test etc:
 
-	grunt              -- hint, test, minify, bundle amd modules, copy to dist (== creates the production version)
+	grunt              -- hint, run unit tests, bundle amd modules, copy to dist, minify (== creates the production version)
 	grunt server       -- everything from the above tasks, then run development server and open browser with live reload
-	grunt test         -- hint, then run tests (tests are not implemented yet)
+	grunt unit         -- hint, then run unit tests
+	grunt integration  -- hint, then run integration tests (require pizza express service to run on http://localhost:3000/)
 
-Next TODOs: HTML transformation dev->dist.
+TODO: Merge require.js into dist/main.js
