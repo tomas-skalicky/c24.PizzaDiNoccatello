@@ -3,7 +3,7 @@ define(["module", "knockout", "router"], function (module, ko, router) {
   // Mapping path -> module:
   var routes = {
     ""                 : "home",
-    "crazy/dough"      : "crazy1",
+    "crazy/doughs"     : "crazy1",
     "crazy/ingredients": "crazy2",
     "menu"             : "menu",
     "checkout"         : "checkout",
@@ -19,7 +19,7 @@ define(["module", "knockout", "router"], function (module, ko, router) {
 
     var self = this;
     router.addListener(function (path) {
-      self.currentModule(routes[path.toLower()] || routes["*"]);
+      self.currentModule(routes[path.toLowerCase()] || routes["*"]);
     });
 
     router.startListening();
