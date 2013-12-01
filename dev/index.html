@@ -4,9 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Scratch</title>
+    <style>
+        header ul { list-style-type: none; padding: 0; }
+        header ul li { display: inline-block; margin-right: 1em; }
+    </style>
 </head>
 <body>
-    <div data-bind="module: currentModule"></div>
+    <header>
+        <h1>Pizza di Noccatello</h1>
+        <!-- This is just for testing purposes -->
+        <ul>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/menu">Alla carte - Menu</a></li>
+            <li><a href="#/crazy/doughs">Go crazy - Doughs</a></li>
+            <li><a href="#/crazy/ingredients">Go crazy - Ingredients</a></li>
+            <li><a href="#/checkout">Checkout</a></li>
+            <li><a href="#/invalid/link">Invalid link</a></li>
+        </ul>
+        <hr>
+    </header>
+    <section data-bind="module: currentModule"></section>
+    <footer>
+        <hr>
+        <p>Copyright 2013 by Pizza di Noccatello &ndash; Via della Fantasia, 42 &ndash; Rome, Italy</p>
+    </footer>
     <script src="//localhost:35729/livereload.js"></script>
     <script data-main="main.dev" src="bower_components/requirejs/require.js"></script>
 </body>

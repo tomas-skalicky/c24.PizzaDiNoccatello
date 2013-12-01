@@ -46,7 +46,7 @@ module.exports = function (grunt) {
       dist: {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         options: {
-          include: ["app", "page1", "page2"],
+          include: ["app", "home", "menu", "crazy1", "crazy2", "checkout", "notfound"],
           mainConfigFile: "main.dist.js",
           out: "dist/main.js",
           optimize: "uglify", // possible values: "uglify" (default), "uglify2" or "none"
