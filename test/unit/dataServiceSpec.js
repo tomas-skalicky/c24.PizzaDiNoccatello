@@ -40,9 +40,13 @@ define(["squire", "q"], function (Squire, Q) {
         expect(pizzas.length).toBeGreaterThan(0);
       });
  
-      it("should return cached items if called repeatedly", function () {
-        dataService.getPizzas().done(); // call it a second time...
-        expect(pjSpy.calls.length).toBe(1); // the ajax mock should have been called just once.
+      async.it("should return cached items if called repeatedly", function (done) {
+        // call it a second time...
+        dataService.getPizzas().done(function (result) {
+          expect(pjSpy.calls.length).toBe(1); // the ajax mock should have been called just once.
+          expect(result).toEqual(pizzas); // the result should be the pizza array from the first call.
+          done();
+        });
       });
 
     });
@@ -81,9 +85,12 @@ define(["squire", "q"], function (Squire, Q) {
         expect((typeof basket === "object") && (basket !== null) && !Array.isArray(basket)).toBe(true);
       });
  
-      it("should make a web request for each call", function () {
-        dataService.getBasket().done(); // call it a second time...
-        expect(pjSpy.calls.length).toBe(2); // the ajax mock should have been called a second time.
+      async.it("should make a web request for each call", function (done) {
+        // call it a second time...
+        dataService.getBasket().done(function (result) {
+          expect(pjSpy.calls.length).toBe(2); // the ajax mock should have been called a second time.
+          done();
+        });
       });
 
     });
