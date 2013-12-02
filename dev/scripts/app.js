@@ -1,21 +1,28 @@
-define(["module", "knockout"], function(module, ko) {
+define(["module", "knockout", "router"], function (module, ko, router) {
+
+  // Mapping path -> module:
+  var routes = {
+    ""                 : "home",
+    "crazy/doughs"     : "crazy1",
+    "crazy/ingredients": "crazy2",
+    "menu"             : "menu",
+    "checkout"         : "checkout",
+    "*"                : "notfound" // fallback route!
+  };
 
   function App() {
     if (!(this instanceof App)) {
       return new App();
     }
 
-    this.currentModule = ko.observable("page1");
+    this.currentModule = ko.observable();
 
-    //this.navigate = (function () {
-    //  this.currentModule("page2");
-    //}).bind(this);
-    //var that = this;
-    //window.setTimeout(function () {
-    //  that.navigate();
-    //}, 2000);
+    var self = this;
+    router.addListener(function (path) {
+      self.currentModule(routes[path.toLowerCase()] || routes["*"]);
+    });
 
-    // Do application logic here!
+    router.startListening();
   }
 
   return App;
