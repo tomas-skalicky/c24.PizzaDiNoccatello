@@ -66,6 +66,17 @@ define(["squire"], function (Squire) {
           });
       });
 
+      async.it("should be 'crazy1' after navigating to 'crAzY/dOugHs' (case insensitivity)", function (done) {
+        new Squire()
+          .mock("router", routerFake)
+          .require(["app"], function (App) {
+            var app = new App();
+            routerFake.navigateTo("crAzY/dOugHs");
+            expect(app.currentModule()).toEqual("crazy1");
+            done();
+          });
+      });
+
       async.it("should be 'notfound' after navigating to an invalid path", function (done) {
         new Squire()
           .mock("router", routerFake)
