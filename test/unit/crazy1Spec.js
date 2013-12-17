@@ -8,14 +8,9 @@ define(["squire", "q"], function (Squire, Q) {
                 promise = Q.fulfill(testDoughs),
                 async = new AsyncSpec(this),
                 crazy1ViewModel,
-                dataService,
-                dataServiceSpy,
                 MockDataService = function () { };
             
-                MockDataService.prototype.getDoughs = function () {
-                    return promise;
-                };
-
+                MockDataService.prototype.getDoughs = function () { return promise; };
 
             async.it("should not call the REST service another time if called repeatedly", function (done) {
                 spyOn(MockDataService.prototype, 'getDoughs').andCallThrough();
