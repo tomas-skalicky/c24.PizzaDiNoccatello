@@ -9,18 +9,16 @@ define(["knockout", "dataService"], function (ko, DataService, undefined) {
         }
 
         var self = this;
-        
-        self.availableDoughs = ko.observableArray();
 
-        self.selectedDough = ko.computed(function () {
-            return ko.utils.arrayFirst(self.availableDoughs(), function (item) {
-                return item.id == id; //selected id will be a string
-            });
+        self.availableDoughs = ko.observableArray();
+        self.selectedDough = ko.observable();
+
+        self.showSelectedDough = ko.computed(function () {
+            return self.selectedDough() !== undefined;
         });
         
-        self.showSelectedDough = ko.computed(function () {
-            debugger;
-            return self.selectedDough() !== undefined;
+        self.selectedDoughDisplayText = ko.computed(function () {
+            return (self.selectedDough() !== undefined) ? self.selectedDough().name : '';
         });
 
         dataService = new DataService();
