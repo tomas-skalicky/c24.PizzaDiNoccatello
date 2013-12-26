@@ -1,0 +1,57 @@
+header {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: darkgreen;
+    color: #eee;
+    padding: 0.5em 1.5em;
+    text-transform: uppercase;
+    font-size: 80%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 6em;
+}
+section {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 5em 0;
+    padding: 1.5em 1.5em;
+}
+footer {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: maroon;
+    color: #fff;
+    text-align: center;
+    padding: 1.5em 1.5em;
+    font-size: 80%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 6em;
+}
+
+
+
+/* Just for testing purposes: */
+
+menu {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    text-align: right;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+menu ul li {
+    display: inline-block;
+    margin-right: 1em;
+}

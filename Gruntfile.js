@@ -64,7 +64,7 @@ module.exports = function (grunt) {
         options: {
           livereload: LIVERELOAD_PORT
         },
-        files: ["Gruntfile.js", "dev/main.dev.js", "dev/scripts/**/*.js", "test/**/*.js", "dev/**/*.html"],
+        files: ["Gruntfile.js", "dev/main.dev.js", "dev/scripts/**/*.js", "test/**/*.js", "dev/**/*.html", "dev/**/*.css"],
         tasks: ["default"]
       }
     },
