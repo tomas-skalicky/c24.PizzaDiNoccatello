@@ -48,6 +48,12 @@ define(["squire", "basket", "knockout"], function (Squire, basket, ko) {
       expect(basket.total()).toBe(14);
     });
 
+    it("should sort pizza items by name", function () {
+      basket.addPizza({ id: "pm", name: "Quattro Stagioni", price: 8.5 });
+      basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
+      expect(basket.items()[0].data.name).toEqual("Margarita");
+    });
+
   });
 
 });

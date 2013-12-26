@@ -38,9 +38,9 @@ define(["knockout"], function (ko) {
 
   basketSort = function (item1, item2) {
     if (item1.type !== item2.type) {
-      return item1.type < item2.type ? 1 : -1;
+      return item1.type < item2.type ? -1 : 1;
     } else if (item1.data.name !== item2.data.name) {
-      return item1.data.name < item2.data.name ? 1 : -1;
+      return item1.data.name < item2.data.name ? -1 : 1;
     } else {
       return 0;
     }
