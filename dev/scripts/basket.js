@@ -2,12 +2,21 @@ define(["knockout"], function (ko) {
 
   var items,
       total,
+      isEmpty,
+      hasPizzas,
+      hasDough,
+      hasToppings,
+      isCrazy,
       reset,
       addPizza,
       removePizza,
+      addDough,
+      removeDough,
+      addTopping,
+      removeTopping,
       basketSort,
       findLastIndex,
-      removeItemByDataId,
+      removeLastItem,
       ITEM_TYPE_PIZZA = 0,
       ITEM_TYPE_DOUGH = 1,
       ITEM_TYPE_TOPPING = 2;
@@ -20,11 +29,40 @@ define(["knockout"], function (ko) {
     }, 0);
   });
 
+  isEmpty = ko.computed(function () {
+    return items().length === 0;
+  });
+
+  hasPizzas = ko.computed(function () {
+    return Array.prototype.some.call(items(), function (item) {
+      return item.type === ITEM_TYPE_PIZZA;
+    });
+  });
+
+  hasDough = ko.computed(function () {
+    return Array.prototype.some.call(items(), function (item) {
+      return item.type === ITEM_TYPE_DOUGH;
+    });
+  });
+
+  hasToppings = ko.computed(function () {
+    return Array.prototype.some.call(items(), function (item) {
+      return item.type === ITEM_TYPE_TOPPING;
+    });
+  });
+
+  isCrazy = ko.computed(function () {
+    return hasDough() || hasToppings();
+  });
+
   reset = function () {
     items([]);
   };
 
   addPizza = function (pizza) {
+    if (isCrazy()) {
+      reset();
+    }
     items.push({
       type: ITEM_TYPE_PIZZA,
       data: pizza
@@ -33,17 +71,50 @@ define(["knockout"], function (ko) {
   };
 
   removePizza = function (pizzaId) {
-    return removeItemByDataId(pizzaId);
+    return removeLastItem(ITEM_TYPE_PIZZA, pizzaId);
+  };
+
+  addDough = function (dough) {
+    if (hasPizzas()) {
+      reset();
+    }
+    removeDough(); // There can be only one!
+    items.push({
+      type: ITEM_TYPE_DOUGH,
+      data: dough
+    });
+    items.sort(basketSort);
+  };
+
+  removeDough = function () {
+    items.remove(function (item) {
+      return item.type === ITEM_TYPE_DOUGH;
+    });
+  };
+
+  addTopping = function (topping) {
+    if (hasPizzas()) {
+      reset();
+    }
+    items.push({
+      type: ITEM_TYPE_TOPPING,
+      data: topping
+    });
+    items.sort(basketSort);
+  };
+
+  removeTopping = function (toppingId) {
+    return removeLastItem(ITEM_TYPE_TOPPING, toppingId);
   };
 
   basketSort = function (item1, item2) {
     if (item1.type !== item2.type) {
       return item1.type < item2.type ? -1 : 1;
-    } else if (item1.data.name !== item2.data.name) {
-      return item1.data.name < item2.data.name ? -1 : 1;
-    } else {
-      return 0;
     }
+    if (item1.data.name !== item2.data.name) {
+      return item1.data.name < item2.data.name ? -1 : 1;
+    }
+    return 0;
   };
 
   findLastIndex = function (array, predicate) {
@@ -55,25 +126,36 @@ define(["knockout"], function (ko) {
     return -1;
   };
 
-  removeItemByDataId = function (id) {
+  removeLastItem = function (type, id) {
     var index = findLastIndex(items(), function (item) {
-      return item.data.id === id;
+      return item.type === type && item.data.id === id;
     });
     if (index !== -1) {
       items.splice(index, 1);
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 
   // Public API:
   return {
     items: items,
     total: total,
+    isEmpty: isEmpty,
+    hasPizzas: hasPizzas,
+    hasDough: hasDough,
+    hasToppings: hasToppings,
+    isCrazy: isCrazy,
     reset: reset,
     addPizza: addPizza,
-    removePizza: removePizza
+    removePizza: removePizza,
+    addDough: addDough,
+    removeDough: removeDough,
+    addTopping: addTopping,
+    removeTopping: removeTopping,
+    ITEM_TYPE_PIZZA: ITEM_TYPE_PIZZA,
+    ITEM_TYPE_DOUGH: ITEM_TYPE_DOUGH,
+    ITEM_TYPE_TOPPING: ITEM_TYPE_TOPPING
   };
 
 });
