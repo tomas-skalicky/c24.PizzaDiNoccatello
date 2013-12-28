@@ -1,4 +1,4 @@
-define(["knockout"], function (ko) {
+define(["knockout", "utils"], function (ko, utils) {
 
   var items,
       total,
@@ -15,7 +15,7 @@ define(["knockout"], function (ko) {
       addTopping,
       removeTopping,
       basketSort,
-      findLastIndex,
+      hasItem,
       removeLastItem,
       ITEM_TYPE_PIZZA = 0,
       ITEM_TYPE_DOUGH = 1,
@@ -96,6 +96,9 @@ define(["knockout"], function (ko) {
     if (hasPizzas()) {
       reset();
     }
+    if (hasItem(ITEM_TYPE_TOPPING, topping.id)) {
+      return;
+    }
     items.push({
       type: ITEM_TYPE_TOPPING,
       data: topping
@@ -117,17 +120,14 @@ define(["knockout"], function (ko) {
     return 0;
   };
 
-  findLastIndex = function (array, predicate) {
-    for (var i = array.length - 1; i >= 0; i--) {
-      if (predicate(array[i])) {
-        return i;
-      }
-    }
-    return -1;
+  hasItem = function (type, id) {
+    return items().some(function (item) {
+      return item.type === type && item.data.id === id;
+    });
   };
 
   removeLastItem = function (type, id) {
-    var index = findLastIndex(items(), function (item) {
+    var index = utils.findLastIndex(items(), function (item) {
       return item.type === type && item.data.id === id;
     });
     if (index !== -1) {
