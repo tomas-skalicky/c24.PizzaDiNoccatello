@@ -24,7 +24,7 @@ define(["knockout", "utils"], function (ko, utils) {
   items = ko.observableArray([]);
 
   total = ko.computed(function () {
-    return Array.prototype.reduce.call(items(), function (accu, item) {
+    return items().reduce(function (accu, item) {
       return accu + item.data.price;
     }, 0);
   });
@@ -34,19 +34,19 @@ define(["knockout", "utils"], function (ko, utils) {
   });
 
   hasPizzas = ko.computed(function () {
-    return Array.prototype.some.call(items(), function (item) {
+    return items().some(function (item) {
       return item.type === ITEM_TYPE_PIZZA;
     });
   });
 
   hasDough = ko.computed(function () {
-    return Array.prototype.some.call(items(), function (item) {
+    return items().some(function (item) {
       return item.type === ITEM_TYPE_DOUGH;
     });
   });
 
   hasToppings = ko.computed(function () {
-    return Array.prototype.some.call(items(), function (item) {
+    return items().some(function (item) {
       return item.type === ITEM_TYPE_TOPPING;
     });
   });
