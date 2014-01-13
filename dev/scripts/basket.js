@@ -24,8 +24,8 @@ define(["knockout", "utils"], function (ko, utils) {
   items = ko.observableArray([]);
 
   total = ko.computed(function () {
-    return items().reduce(function (accu, item) {
-      return accu + item.data.price;
+    return items().reduce(function (sum, item) {
+      return sum + item.data.price;
     }, 0);
   });
 
