@@ -27,7 +27,7 @@ module.exports = function (grunt) {
       }
     },
     prettify: {
-      one: {
+      dist: {
         src: "dist/index.html",
         dest: "dist/index.html"
       }
@@ -134,9 +134,11 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask("default", ["unit", "clean", "copy", "replace", "prettify", "requirejs", "concat", "uglify"]);
-  grunt.registerTask("server", ["default", "connect:dev", "open:dev", "watch:dev"]);
-  grunt.registerTask("unit", ["jshint", "karma:unit"]);
-  grunt.registerTask("integration", ["jshint", "karma:integration"]);
+  grunt.registerTask("default", ["test-unit", "clean", "build-html", "build-js"]);
+  grunt.registerTask("live", ["default", "connect:dev", "open:dev", "watch:dev"]);
+  grunt.registerTask("test-unit", ["jshint", "karma:unit"]);
+  grunt.registerTask("test-integration", ["jshint", "karma:integration"]);
+  grunt.registerTask("build-html", ["copy", "replace", "prettify"]);
+  grunt.registerTask("build-js", ["requirejs", "concat", "uglify"]);
 
 };
