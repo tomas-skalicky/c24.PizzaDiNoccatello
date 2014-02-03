@@ -15,12 +15,3 @@ require.config({
   },
   "urlArgs": "version=" +  (new Date()).getTime()
 });
-
-require(["module", "app", "knockout", "knockout-amd-helpers"], function(module, App, ko) {
-  ko.amdTemplateEngine.defaultPath = "../templates";
-  ko.amdTemplateEngine.defaultSuffix = ".html";
-
-  window.setTimeout(function() {
-    ko.applyBindings(new App());
-  }, 0);
-});

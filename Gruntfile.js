@@ -15,11 +15,11 @@ module.exports = function (grunt) {
     clean: ["dist"],
     replace: {
       dist: {
-        src: ["dev/index.html"],
+        src: ["dist/index.html"],
         dest: "dist/index.html",
         replacements: [{ 
           from: "<script data-main=\"main.dev\" src=\"bower_components/requirejs/require.js\"></script>",
-          to: "<script src=\"main.js\"></script>"
+          to: "<script src=\"main.min.js\"></script>"
         }, {
           from: "<script src=\"//localhost:35729/livereload.js\"></script>",
           to: ""
@@ -30,6 +30,13 @@ module.exports = function (grunt) {
       one: {
         src: "dist/index.html",
         dest: "dist/index.html"
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          "dist/main.min.js": ["dist/main.js"]
+        }
       }
     },
     jshint: {
@@ -49,7 +56,7 @@ module.exports = function (grunt) {
           include: ["app", "home", "menu", "crazy1", "crazy2", "checkout", "notfound"],
           mainConfigFile: "main.dist.js",
           out: "dist/main.js",
-          optimize: "uglify", // possible values: "uglify" (default), "uglify2" or "none"
+          optimize: "none", // possible values: "uglify" (default), "uglify2" or "none"
           preserveLicenseComments: false,
           useStrict: true,
           wrap: false
@@ -103,10 +110,31 @@ module.exports = function (grunt) {
       integration: {
         exclude: ["test/unit/**/*.js"]
       }
+    },
+    copy: {
+      dist: {
+        files: [{
+          cwd: "dev/templates/",
+          src: "**",
+          dest: "dist/templates/",
+          filter: "isFile",
+          expand: true,
+          nonull: true
+        }, {
+          src: "dev/index.html",
+          dest: "dist/index.html"
+        }]
+      }
+    },
+    concat: {
+      dist: {
+        src: ["dev/bower_components/requirejs/require.js", "dist/main.js"],
+        dest: "dist/main.js"
+      }
     }
   });
 
-  grunt.registerTask("default", ["unit", "clean", "replace", "prettify", "requirejs"]);
+  grunt.registerTask("default", ["unit", "clean", "copy", "replace", "prettify", "requirejs", "concat", "uglify"]);
   grunt.registerTask("server", ["default", "connect:dev", "open:dev", "watch:dev"]);
   grunt.registerTask("unit", ["jshint", "karma:unit"]);
   grunt.registerTask("integration", ["jshint", "karma:integration"]);

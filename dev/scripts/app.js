@@ -1,4 +1,4 @@
-define(["module", "knockout", "router"], function (module, ko, router) {
+define(["module", "knockout", "window", "router", "knockout-amd-helpers", "text"], function (module, ko, window, router) {
 
   // Mapping path -> module:
   var routes = {
@@ -24,6 +24,15 @@ define(["module", "knockout", "router"], function (module, ko, router) {
 
     router.startListening();
   }
+
+  App.start = function () {
+    ko.amdTemplateEngine.defaultPath = "../templates";
+    ko.amdTemplateEngine.defaultSuffix = ".html";
+
+    window.setTimeout(function() {
+      ko.applyBindings(new App());
+    }, 0);
+  };
 
   return App;
 
