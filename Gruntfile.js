@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         dest: "dist/index.html",
         replacements: [{ 
           from: "<script data-main=\"main.dev\" src=\"bower_components/requirejs/require.js\"></script>",
-          to: "<script src=\"main.min.js\"></script>"
+          to: "<script src=\"main.min.js\"></script><script> require([\"app\"], function (App) { App.start(); }); </script>"
         }, {
           from: "<script src=\"//localhost:35729/livereload.js\"></script>",
           to: ""

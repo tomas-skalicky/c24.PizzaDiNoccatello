@@ -15,3 +15,7 @@ require.config({
   },
   "urlArgs": "version=" +  (new Date()).getTime()
 });
+
+require(["app"], function (App) {
+  App.start();
+});
