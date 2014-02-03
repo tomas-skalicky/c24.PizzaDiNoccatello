@@ -1,4 +1,4 @@
-define(["knockout"], function (ko) {
+define([], function () {
 
   var NotFoundViewModel;
 
@@ -6,8 +6,6 @@ define(["knockout"], function (ko) {
     if (!(this instanceof NotFoundViewModel)) {
         return new NotFoundViewModel();
     }
-
-    this.message = ko.observable("This message comes from NotFoundViewModel.");
   };
 
   return NotFoundViewModel;
