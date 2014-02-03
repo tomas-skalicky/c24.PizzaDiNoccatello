@@ -14,6 +14,8 @@ define(["knockout", "utils"], function (ko, utils) {
       removeDough,
       addTopping,
       removeTopping,
+      duplicateItem,
+      removeItem,
       basketSort,
       hasItem,
       removeLastItem,
@@ -110,6 +112,18 @@ define(["knockout", "utils"], function (ko, utils) {
     return removeLastItem(ITEM_TYPE_TOPPING, toppingId);
   };
 
+  duplicateItem = function (item) {
+    items.push({
+      type: item.type,
+      data: item.data
+    });
+    items.sort(basketSort);
+  };
+
+  removeItem = function (item) {
+    items.remove(item);
+  };
+
   basketSort = function (item1, item2) {
     if (item1.type !== item2.type) {
       return item1.type < item2.type ? -1 : 1;
@@ -153,6 +167,8 @@ define(["knockout", "utils"], function (ko, utils) {
     removeDough: removeDough,
     addTopping: addTopping,
     removeTopping: removeTopping,
+    duplicateItem: duplicateItem,
+    removeItem: removeItem,
     ITEM_TYPE_PIZZA: ITEM_TYPE_PIZZA,
     ITEM_TYPE_DOUGH: ITEM_TYPE_DOUGH,
     ITEM_TYPE_TOPPING: ITEM_TYPE_TOPPING

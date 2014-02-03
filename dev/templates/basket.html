@@ -1,0 +1,34 @@
+<h3 data-bind="text: isCrazy() ? 'Your crazy basket' : 'Your basket'"></h3>
+<div data-bind="visible: isEmpty">
+    <p>Your basket is empty.</p>
+</div>
+<table data-bind="visible: !isEmpty()">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Name</td>
+            <td>Price</td>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: items">
+        <tr>
+            <td>
+                <button data-bind="click: $parent.duplicateItem">+</button>
+                <button data-bind="click: $parent.removeItem">&ndash;</button>
+            </td>
+            <td>
+                <span data-bind="text: data.name"></span>
+            </td>
+            <td>
+                <span data-bind="text: data.price.toFixed(2)"></span>&nbsp;EUR
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                Total:&nbsp;<span data-bind="text: total().toFixed(2)"></span>&nbsp;EUR
+            </td>
+        </tr>
+    </tfoot>
+</table>
