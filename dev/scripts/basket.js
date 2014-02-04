@@ -14,7 +14,7 @@ define(["knockout", "utils"], function (ko, utils) {
       removeDough,
       addTopping,
       removeTopping,
-      duplicateItem,
+      cloneItem,
       removeItem,
       basketSort,
       hasItem,
@@ -112,7 +112,7 @@ define(["knockout", "utils"], function (ko, utils) {
     return removeLastItem(ITEM_TYPE_TOPPING, toppingId);
   };
 
-  duplicateItem = function (item) {
+  cloneItem = function (item) {
     items.push({
       type: item.type,
       data: item.data
@@ -167,7 +167,7 @@ define(["knockout", "utils"], function (ko, utils) {
     removeDough: removeDough,
     addTopping: addTopping,
     removeTopping: removeTopping,
-    duplicateItem: duplicateItem,
+    cloneItem: cloneItem,
     removeItem: removeItem,
     ITEM_TYPE_PIZZA: ITEM_TYPE_PIZZA,
     ITEM_TYPE_DOUGH: ITEM_TYPE_DOUGH,

@@ -194,11 +194,11 @@ define(["basket"], function (basket) {
       });
     });
 
-    describe("When 'duplicateItem' has been called", function () {
+    describe("When 'cloneItem' has been called", function () {
       it("should add a clone of the provided item", function () {
         basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
         basket.addPizza({ id: "ps", name: "Salame", price: 8 });
-        basket.duplicateItem(basket.items()[0]);
+        basket.cloneItem(basket.items()[0]);
         expect(basket.items()[0].data.name).toBe("Margarita");
         expect(basket.items()[1].data.name).toBe("Margarita");
         expect(basket.items()[2].data.name).toBe("Salame");
