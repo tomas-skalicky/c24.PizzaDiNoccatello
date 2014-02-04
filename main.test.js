@@ -20,7 +20,7 @@ require.config({
   }
 });
 
-define("module", [], function() {
+define("module", [], function () {
   return { config: function () { return config; } };
 });
 

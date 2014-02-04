@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         dest: "dist/index.html",
         replacements: [{ 
           from: "<script data-main=\"main.dev\" src=\"bower_components/requirejs/require.js\"></script>",
-          to: "<script src=\"main.min.js\"></script><script> require([\"app\"], function (App) { App.start(); }); </script>"
+          to: "<script src=\"main.min.js\"></script>"
         }, {
           from: "<script src=\"//localhost:35729/livereload.js\"></script>",
           to: ""
@@ -54,6 +54,7 @@ module.exports = function (grunt) {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         options: {
           include: ["app", "home", "menu", "crazy1", "crazy2", "checkout", "notfound"],
+          insertRequire: ["app"],
           mainConfigFile: "main.dist.js",
           out: "dist/main.js",
           optimize: "none", // possible values: "uglify" (default), "uglify2" or "none"
