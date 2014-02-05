@@ -8,15 +8,16 @@ define(["squire", "q"], function (Squire, Q) {
           async   = new AsyncSpec(this),
           dataService,
           pjSpy,
-          pizzas;
+          pizzas,
+          that = this;
 
       async.beforeEach(function (done) {
         pjSpy = jasmine.createSpy("pjSpy").andReturn(promise);
         new Squire()
           .mock("pajamas", function () { return pjSpy; })
-          .require(["dataService"], function (DataService) {
-              dataService = new DataService();
-              dataService.getPizzas().done(function (result) {
+          .require(["dataService"], function (dataService) {
+              that.dataService = dataService;
+              that.dataService.getPizzas().done(function (result) {
                 pizzas = result;
                 done();
               });
@@ -24,7 +25,6 @@ define(["squire", "q"], function (Squire, Q) {
       });
 
       afterEach(function () {
-        dataService = null;
         pjSpy = null;
         pizzas = null;
       });
@@ -39,7 +39,7 @@ define(["squire", "q"], function (Squire, Q) {
  
       async.it("should not call the REST service another time if called repeatedly", function (done) {
         // call it a second time...
-        dataService.getPizzas().done(function (result) {
+        that.dataService.getPizzas().done(function (result) {
           expect(pjSpy.calls.length).toBe(1); // the ajax mock should have been called just once.
           done();
         });
@@ -47,7 +47,7 @@ define(["squire", "q"], function (Squire, Q) {
  
       async.it("should return cached items if called repeatedly", function (done) {
         // call it a second time...
-        dataService.getPizzas().done(function (result) {
+        that.dataService.getPizzas().done(function (result) {
           expect(result).toEqual(pizzas); // the result should be the pizza array from the first call.
           done();
         });

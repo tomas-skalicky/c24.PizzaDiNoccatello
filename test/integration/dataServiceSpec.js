@@ -1,4 +1,4 @@
-define(["dataService", "q"], function (DataService, Q) {
+define(["dataService", "q"], function (dataService, Q) {
 
   describe("On dataService", function () {
 
@@ -11,7 +11,6 @@ define(["dataService", "q"], function (DataService, Q) {
 
       async.beforeEach(function (done) {
         failCallback = jasmine.createSpy("failCallback");
-        dataService = new DataService();
         dataService.getPizzas()
           .then(function (result) { pizzas = result; })
           .fail(failCallback)
