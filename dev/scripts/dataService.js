@@ -1,7 +1,6 @@
 define(["pajamas", "q"], function (pj, Q) {
 
-  var DataService,
-      baseUri = "http://localhost:3000/api/",
+  var baseUri = "http://localhost:3000/api/",
       cache = {};
       
   function getOrSetCachedItem (key, createFunc) {

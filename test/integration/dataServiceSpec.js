@@ -6,7 +6,6 @@ define(["dataService", "q"], function (dataService, Q) {
 
       var async = new AsyncSpec(this),
           failCallback,
-          dataService,
           pizzas;
 
       async.beforeEach(function (done) {
@@ -19,7 +18,6 @@ define(["dataService", "q"], function (dataService, Q) {
 
       afterEach(function () {
         failCallback = null;
-        dataService = null;
         pizzas = null;
       });
  
