@@ -1,4 +1,4 @@
-define(["knockout", "basket"], function (ko, basket) {
+define(["knockout", "basket", "dataService"], function (ko, basket, dataService) {
 
   var MenuViewModel;
 
@@ -9,14 +9,14 @@ define(["knockout", "basket"], function (ko, basket) {
 
     this.message = ko.observable("This message comes from MenuViewModel.");
 
-    // For testing purposes:
     if (basket.isEmpty()) {
-        basket.addPizza({ id: "pqs", name: "Quattro Stagioni", price: 8.5 });
-        basket.addPizza({ id: "pqs", name: "Quattro Stagioni", price: 8.5 });
-        basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
-        basket.addPizza({ id: "ps", name: "Salame", price: 8 });
+        var promise = dataService.getPizzas();
+            promise.then(function (pizzas) {
+            pizzas.forEach(function (pizza) {
+              basket.addPizza(pizza);
+             });
+         });
     }
-
   };
 
   return MenuViewModel;
