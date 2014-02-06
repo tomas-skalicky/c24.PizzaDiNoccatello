@@ -8,8 +8,7 @@ define(["squire", "q"], function (Squire, Q) {
           async   = new AsyncSpec(this),
           dataService,
           pjSpy,
-          pizzas,
-          that = this;
+          pizzas;
 
       async.beforeEach(function (done) {
         pjSpy = jasmine.createSpy("pjSpy").andReturn(promise);
