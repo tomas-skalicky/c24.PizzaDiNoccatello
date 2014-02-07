@@ -6,7 +6,7 @@ define(["knockout", "basket"], function (ko, basket) {
 
    addPizza = function (pizza) {
      pizzas.push(pizza);
-   }
+   };
 
   isEmpty = ko.computed(function () {
     return pizzas().length === 0;
@@ -21,5 +21,5 @@ define(["knockout", "basket"], function (ko, basket) {
      addPizza : addPizza,
      isEmpty : isEmpty,
      selectPizza : selectPizza
-   }
+   };
 });
