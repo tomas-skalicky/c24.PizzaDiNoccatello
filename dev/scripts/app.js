@@ -1,4 +1,7 @@
-define(["module", "knockout", "router"], function (module, ko, router) {
+define(["module", "knockout", "window", "router", "knockout-amd-helpers", "text"], function (module, ko, window, router) {
+
+  ko.amdTemplateEngine.defaultPath = "../templates";
+  ko.amdTemplateEngine.defaultSuffix = ".html";
 
   // Mapping path -> module:
   var routes = {
@@ -10,21 +13,20 @@ define(["module", "knockout", "router"], function (module, ko, router) {
     "*"                : "notfound" // fallback route!
   };
 
-  function App() {
-    if (!(this instanceof App)) {
-      return new App();
-    }
+  var app = {
+    currentModule: ko.observable()
+  };
 
-    this.currentModule = ko.observable();
+  router.addListener(function (path) {
+    app.currentModule(routes[path.toLowerCase()] || routes["*"]);
+  });
 
-    var self = this;
-    router.addListener(function (path) {
-      self.currentModule(routes[path.toLowerCase()] || routes["*"]);
-    });
+  router.startListening();
 
-    router.startListening();
-  }
+  window.setTimeout(function () {
+    ko.applyBindings(app);
+  }, 0);
 
-  return App;
+  return app;
 
 });

@@ -14,8 +14,8 @@ define(["squire", "q"], function (Squire, Q) {
         pjSpy = jasmine.createSpy("pjSpy").andReturn(promise);
         new Squire()
           .mock("pajamas", function () { return pjSpy; })
-          .require(["dataService"], function (DataService) {
-              dataService = new DataService();
+          .require(["dataService"], function (service) {
+              dataService = service;
               dataService.getPizzas().done(function (result) {
                 pizzas = result;
                 done();
@@ -24,7 +24,6 @@ define(["squire", "q"], function (Squire, Q) {
       });
 
       afterEach(function () {
-        dataService = null;
         pjSpy = null;
         pizzas = null;
       });
