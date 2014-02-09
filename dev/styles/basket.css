@@ -1,4 +1,7 @@
 .basket {
+    position: absolute;
+    top: 120px;
+    right: 50px;
     width: 400px;
     min-height: 400px;
     margin: 0;
