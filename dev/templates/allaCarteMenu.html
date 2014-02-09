@@ -1,0 +1,27 @@
+<h3>Offers alla Carte!</h3>
+
+<div data-bind="visible: isEmpty">
+    <p> Ooops! Our Kitchen is having problems with the delivery! Please try it later. </p>
+</div>
+
+<table data-bind="visible: !isEmpty()">
+     <thead>
+         <tr>
+	    <td>Name</td>
+	    <td>Price</td>
+         </tr>
+     </thead>
+     <tbody data-bind="foreach: pizzas">
+          <tr>
+	      <td>
+		  <span data-bind="text: name"> </span>
+	      </td>
+	      <td>
+                <span data-bind="text: price.toFixed(2)"></span>&nbsp;EUR
+	      </td>
+              <td>
+                  <button data-bind="click: $parent.selectPizza">Select</button>
+              </td>
+          </tr>
+     </tbody>
+</table>
