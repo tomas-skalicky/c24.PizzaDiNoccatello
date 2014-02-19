@@ -1,4 +1,4 @@
-define(["knockout", "router"], function (ko, router) {
+define(["knockout", "navigationService"], function (ko, navigationService) {
 
   var homeViewModel = {},
       availableOptions = {
@@ -11,7 +11,7 @@ define(["knockout", "router"], function (ko, router) {
   homeViewModel.currentOption = ko.observable(homeViewModel.availableOptions()[0]);
 
   homeViewModel.navigateToCurrentOption = function () {
-    router.navigateTo(availableOptions[homeViewModel.currentOption()]);
+    navigationService.navigateTo(availableOptions[homeViewModel.currentOption()]);
   };
 
   return homeViewModel;

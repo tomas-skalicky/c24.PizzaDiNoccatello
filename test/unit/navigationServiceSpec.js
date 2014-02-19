@@ -1,6 +1,6 @@
 define(["squire"], function (Squire) {
 
-  describe("router", function () {
+  describe("navigationService", function () {
 
     var async = new AsyncSpec(this),
         windowFake = null;
@@ -41,9 +41,9 @@ define(["squire"], function (Squire) {
       var listeners = [ 1, 2, 3 ].map(jasmine.createSpy);
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          listeners.forEach(router.addListener);
-          router.startListening();
+        .require(["navigationService"], function (navigationService) {
+          listeners.forEach(navigationService.addListener);
+          navigationService.startListening();
           listeners.forEach(function (listener) {
             expect(listener).toHaveBeenCalledWith("crazy/doughs");
           });
@@ -55,9 +55,9 @@ define(["squire"], function (Squire) {
       var listeners = [ 1, 2, 3 ].map(jasmine.createSpy);
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          listeners.forEach(router.addListener);
-          router.startListening();
+        .require(["navigationService"], function (navigationService) {
+          listeners.forEach(navigationService.addListener);
+          navigationService.startListening();
           windowFake.location.hash = "#/crazy/ingredients";
           windowFake._triggerEvent();
           listeners.forEach(function (listener) {
@@ -71,8 +71,8 @@ define(["squire"], function (Squire) {
     async.it("'getCurrentPath' should return a cleaned up path", function (done) {
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          expect(router.getCurrentPath()).toEqual("crazy/doughs");
+        .require(["navigationService"], function (navigationService) {
+          expect(navigationService.getCurrentPath()).toEqual("crazy/doughs");
           done();
         });
     });     
@@ -80,8 +80,8 @@ define(["squire"], function (Squire) {
     async.it("'navigateTo' should construct the correct target URL", function (done) {
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          router.navigateTo("crazy/ingredients");
+        .require(["navigationService"], function (navigationService) {
+          navigationService.navigateTo("crazy/ingredients");
           expect(windowFake.location.href).toEqual("http://pizza-di-noccatello.it/online-trattoria/#/crazy/ingredients");
           done();
         });
@@ -90,8 +90,8 @@ define(["squire"], function (Squire) {
     async.it("'navigateTo' should construct the correct target URL for an unclean path", function (done) {
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          router.navigateTo("#crazy/ingredients/");
+        .require(["navigationService"], function (navigationService) {
+          navigationService.navigateTo("#crazy/ingredients/");
           expect(windowFake.location.href).toEqual("http://pizza-di-noccatello.it/online-trattoria/#/crazy/ingredients");
           done();
         });
@@ -100,8 +100,8 @@ define(["squire"], function (Squire) {
     async.it("'navigateTo' should construct the correct target URL for an empty path", function (done) {
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          router.navigateTo("#/");
+        .require(["navigationService"], function (navigationService) {
+          navigationService.navigateTo("#/");
           expect(windowFake.location.href).toEqual("http://pizza-di-noccatello.it/online-trattoria/");
           done();
         });
@@ -110,8 +110,8 @@ define(["squire"], function (Squire) {
     async.it("'redirectTo' should call 'window.location.replace' the correct target URL", function (done) {
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          router.redirectTo("crazy/ingredients");
+        .require(["navigationService"], function (navigationService) {
+          navigationService.redirectTo("crazy/ingredients");
           expect(windowFake.location.href).toEqual("http://pizza-di-noccatello.it/online-trattoria/#/crazy/ingredients");
           done();
         });
@@ -120,8 +120,8 @@ define(["squire"], function (Squire) {
     async.it("'redirectTo' should call 'window.location.replace' the correct target URL for an unclean path", function (done) {
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          router.redirectTo("/crazy/ingredients ");
+        .require(["navigationService"], function (navigationService) {
+          navigationService.redirectTo("/crazy/ingredients ");
           expect(windowFake.location.href).toEqual("http://pizza-di-noccatello.it/online-trattoria/#/crazy/ingredients");
           done();
         });
@@ -130,8 +130,8 @@ define(["squire"], function (Squire) {
     async.it("'redirectTo' should call 'window.location.replace' the correct target URL for an empty path", function (done) {
       new Squire()
         .mock("window", windowFake)
-        .require(["router"], function (router) {
-          router.redirectTo("#");
+        .require(["navigationService"], function (navigationService) {
+          navigationService.redirectTo("#");
           expect(windowFake.location.href).toEqual("http://pizza-di-noccatello.it/online-trattoria/");
           done();
         });
