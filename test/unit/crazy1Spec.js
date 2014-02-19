@@ -8,19 +8,18 @@ define(["squire", "q"], function (Squire, Q) {
                 promise = Q.fulfill(testDoughs),
                 async = new AsyncSpec(this),
                 crazy1ViewModel,
-                MockDataService = function () { };
+                mockDataService = {};
             
-                MockDataService.prototype.getDoughs = function () { return promise; };
+                mockDataService.getDoughs = function () { return promise; };
 
             async.it("should not call the REST service another time if called repeatedly", function (done) {
-                spyOn(MockDataService.prototype, 'getDoughs').andCallThrough();
+                spyOn(mockDataService, 'getDoughs').andCallThrough();
                 
                 new Squire()
-                .mock("dataService", function() { return MockDataService; })
-                .require(["crazy1"], function (Crazy1ViewModel) {
-                    crazy1ViewModel = new Crazy1ViewModel();
+                .mock("dataService", function() { return mockDataService; })
+                .require(["crazy1"], function (crazy1ViewModel) {
                     promise.done(function () {
-                        expect(MockDataService.prototype.getDoughs).toHaveBeenCalled(); // the ajax mock should have been called.
+                        expect(mockDataService.getDoughs).toHaveBeenCalled(); // the ajax mock should have been called.
                         done();
                     });
                 });
@@ -28,9 +27,8 @@ define(["squire", "q"], function (Squire, Q) {
             
             async.it("the available doughs should be filled with the provided test doughs", function (done) {
                 new Squire()
-                .mock("dataService", function () { return MockDataService; })
-                .require(["crazy1"], function (Crazy1ViewModel) {
-                    crazy1ViewModel = new Crazy1ViewModel();
+                .mock("dataService", function () { return mockDataService; })
+                .require(["crazy1"], function (crazy1ViewModel) {
                     promise.done(function () {
                         expect(crazy1ViewModel.availableDoughs().length).toBe(testDoughs.length); // the dataService mock should have been called just once.
                         done();

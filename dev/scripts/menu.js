@@ -1,24 +1,19 @@
 define(["knockout", "allaCarteMenu", "dataService"], function (ko, allaCarteMenu, dataService) {
 
-  var MenuViewModel;
+  var menuViewModel = {};
 
-  MenuViewModel = function () {
-    if (!(this instanceof MenuViewModel)) {
-        return new MenuViewModel();
-    }
+  menuViewModel.message = ko.observable("This message comes from MenuViewModel.");
 
-    this.message = ko.observable("This message comes from MenuViewModel.");
+  if (allaCarteMenu.isEmpty()) {
+    dataService
+      .getPizzas()
+      .then(function (pizzas) {
+        pizzas.forEach(function (pizza) {
+          allaCarteMenu.addPizza(pizza);
+        });
+      });
+  }
 
-    if (allaCarteMenu.isEmpty()) {
-       dataService.getPizzas()
-                  .then(function (pizzas) {
-                        pizzas.forEach(function (pizza) {
-                            allaCarteMenu.addPizza(pizza);
-                        });
-                  });
-    }
-  };
-
-  return MenuViewModel;
+  return menuViewModel;
 
 });

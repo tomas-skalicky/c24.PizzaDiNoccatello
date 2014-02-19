@@ -1,25 +1,19 @@
 define(["knockout", "router"], function (ko, router) {
 
-  var HomeViewModel,
+  var homeViewModel = {},
       availableOptions = {
         "Order à la carte": "#/menu",
         "Go crazy": "#/crazy/doughs"
       };
 
-  HomeViewModel = function () {
-    if (!(this instanceof HomeViewModel)) {
-      return new HomeViewModel();
-    }
+  homeViewModel.availableOptions = ko.observableArray(Object.keys(availableOptions));
 
-    this.availableOptions = ko.observableArray(Object.keys(availableOptions));
+  homeViewModel.currentOption = ko.observable(homeViewModel.availableOptions()[0]);
 
-    this.currentOption = ko.observable(this.availableOptions()[0]);
-
-    this.navigateToCurrentOption = (function () {
-      router.navigateTo(availableOptions[this.currentOption()]);
-    }).bind(this);
+  homeViewModel.navigateToCurrentOption = function () {
+    router.navigateTo(availableOptions[homeViewModel.currentOption()]);
   };
 
-  return HomeViewModel;
+  return homeViewModel;
 
 });

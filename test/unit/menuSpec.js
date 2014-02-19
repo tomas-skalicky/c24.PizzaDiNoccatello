@@ -6,7 +6,7 @@ define(["squire", "q"], function (Squire, Q) {
                 injector,
                 async = new AsyncSpec(this);
            
-           async.beforeEach(function (done){
+            async.beforeEach(function (done){
                 dataServiceMock = jasmine.createSpyObj("dataService", ["getPizzas"]);
                 dataServiceMock.getPizzas.andReturn(Q.when([{}]));
 
@@ -15,11 +15,10 @@ define(["squire", "q"], function (Squire, Q) {
                     return dataServiceMock;
                 });
                 
-                injector.require(["menu"], function (MenuViewModel){
-                    menuViewModel = new MenuViewModel ();
+                injector.require(["menu"], function (menuViewModel){
                     done();
                 });
-           });
+            });
 
             it ("should call the express server", function () {
                 expect(dataServiceMock.getPizzas).toHaveBeenCalled();
