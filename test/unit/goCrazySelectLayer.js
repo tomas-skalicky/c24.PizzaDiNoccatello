@@ -1,13 +1,13 @@
 define(["squire", "q"], function (Squire, Q) {
 
-    describe("On crazy1", function () {
+    describe("On goCrazySelectLayer", function () {
 
-        describe("when 'crazy1' viewmodel is created", function () {
+        describe("when 'goCrazySelectLayer' viewmodel is created", function () {
 
             var testDoughs = [{ "id": 1, "name": "Thin Crust", "price": 2 }, { "id": 2, "name": "Whole-grain bread", "price": 1.5 }, { "id": 3, "name": "white bread", "price": 1.75 }],
                 promise = Q.fulfill(testDoughs),
                 async = new AsyncSpec(this),
-                crazy1ViewModel,
+                goCrazySelectLayerViewModel,
                 mockDataService = {};
             
                 mockDataService.getDoughs = function () { return promise; };
@@ -17,7 +17,7 @@ define(["squire", "q"], function (Squire, Q) {
                 
                 new Squire()
                 .mock("dataService", function() { return mockDataService; })
-                .require(["crazy1"], function (crazy1ViewModel) {
+                .require(["goCrazySelectLayer"], function (gotCrazySelectLayerViewModel) {
                     promise.done(function () {
                         expect(mockDataService.getDoughs).toHaveBeenCalled(); // the ajax mock should have been called.
                         done();
@@ -28,9 +28,9 @@ define(["squire", "q"], function (Squire, Q) {
             async.it("the available doughs should be filled with the provided test doughs", function (done) {
                 new Squire()
                 .mock("dataService", function () { return mockDataService; })
-                .require(["crazy1"], function (crazy1ViewModel) {
+                .require(["goCrazySelectLayer"], function (gotCrazySelectLayerViewModel) {
                     promise.done(function () {
-                        expect(crazy1ViewModel.availableDoughs().length).toBe(testDoughs.length); // the dataService mock should have been called just once.
+                        expect(goCrazySelectLayerViewModel.availableDoughs().length).toBe(testDoughs.length); // the dataService mock should have been called just once.
                         done();
                     });
                 });
