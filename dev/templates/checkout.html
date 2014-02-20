@@ -1,2 +1,29 @@
-<h2>This is template "checkout"</h2>
-<p data-bind="text: message"></p>
+<section data-bind="visible: !isClosed()">
+    <h2>We're nearly there!</h2>
+    <p>Please review your order, fill out the form and press the confirm button.</p>
+    <fieldset>
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="name">Name</label>:</td>
+                    <td colspan="2"><input type="text" name="name" data-bind="value: name, valueUpdate: 'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Street</label>:</td>
+                    <td colspan="2"><input type="text" name="street" data-bind="value: street, valueUpdate: 'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <td><label for="postalCode">Postal code</label>/<label for="city">City</label>:</td>
+                    <td><input type="text" name="postalCode" data-bind="value: postalCode, valueUpdate: 'afterkeydown'" /></td>
+                    <td><input type="text" name="city" data-bind="value: city, valueUpdate: 'afterkeydown'" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <button data-bind="enable: canConfirm, click: confirm"><b>CONFIRM</b></button>
+    </fieldset>
+    <aside data-bind="module: 'basket'"></aside>
+</section>
+<section data-bind="visible: isClosed">
+    <h2>Thank You!</h2>
+    <p>Your order is being processed and your pizzas will soon arrive at your home!</p>
+</section>
