@@ -13,7 +13,7 @@ define(["knockout", "basket"], function (ko, basket) {
     this.postalCode = ko.observable("");
     this.city = ko.observable("");
     this.canConfirm = ko.computed((function () {
-        return this.name() && this.street() && this.postalCode() && this.city() && !basket.isEmpty();
+        return !!(this.name() && this.street() && this.postalCode() && this.city() && !basket.isEmpty());
     }).bind(this));
     this.confirm = (function () {
         this.isClosed(true);
