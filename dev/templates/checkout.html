@@ -6,22 +6,25 @@
             <tbody>
                 <tr>
                     <td><label for="name">Name</label>:</td>
-                    <td colspan="2"><input type="text" name="name" data-bind="value: name, valueUpdate: 'afterkeydown'" /></td>
+                    <td><input type="text" name="name" data-bind="value: name, valueUpdate: 'afterkeydown'" /></td>
                 </tr>
                 <tr>
                     <td><label for="name">Street</label>:</td>
-                    <td colspan="2"><input type="text" name="street" data-bind="value: street, valueUpdate: 'afterkeydown'" /></td>
+                    <td><input type="text" name="street" data-bind="value: street, valueUpdate: 'afterkeydown'" /></td>
                 </tr>
                 <tr>
-                    <td><label for="postalCode">Postal code</label>/<label for="city">City</label>:</td>
+                    <td><label for="postalCode">Postal code</label>:</td>
                     <td><input type="text" name="postalCode" data-bind="value: postalCode, valueUpdate: 'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <td><label for="city">City</label>:</td>
                     <td><input type="text" name="city" data-bind="value: city, valueUpdate: 'afterkeydown'" /></td>
                 </tr>
             </tbody>
         </table>
         <button data-bind="enable: canConfirm, click: confirm"><b>CONFIRM</b></button>
     </fieldset>
-    <aside data-bind="module: 'basket'"></aside>
+    <aside class="basket" data-bind="module: 'basket'"></aside>
 </section>
 <section data-bind="visible: isClosed">
     <h2>Thank You!</h2>

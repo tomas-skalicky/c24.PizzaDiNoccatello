@@ -4,7 +4,7 @@
     -webkit-box-sizing: border-box;
 }
 
-header {
+body > header {
     background: #006400;
     color: #eee;
     padding: 0.5em 1.5em;
@@ -16,12 +16,12 @@ header {
     height: 6em;
 }
 
-section {
+body > section {
     margin: 5em 0;
     padding: 1.5em 1.5em;
 }
 
-footer {
+body > footer {
     background: #800000;
     color: #fff;
     text-align: center;

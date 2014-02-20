@@ -2,8 +2,6 @@ define(["knockout", "allaCarteMenu", "dataService"], function (ko, allaCarteMenu
 
   var menuViewModel = {};
 
-  menuViewModel.message = ko.observable("This message comes from MenuViewModel.");
-
   if (allaCarteMenu.isEmpty()) {
     dataService
       .getPizzas()
