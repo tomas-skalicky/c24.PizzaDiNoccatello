@@ -1,32 +1,22 @@
-define(["knockout", "dataService"], function (ko, DataService, undefined) {
+define(["knockout", "dataService"], function (ko, dataService, undefined) {
 
-    var crazy1ViewModel,
-        dataService;
+  var crazy1ViewModel = {};
 
-    crazy1ViewModel = function () {
-        if (!(this instanceof crazy1ViewModel)) {
-            return new crazy1ViewModel();
-        }
+  crazy1ViewModel.availableDoughs = ko.observableArray();
+  crazy1ViewModel.selectedDough = ko.observable();
 
-        var self = this;
+  crazy1ViewModel.showSelectedDough = ko.computed(function () {
+    return crazy1ViewModel.selectedDough() !== undefined;
+  });
 
-        self.availableDoughs = ko.observableArray();
-        self.selectedDough = ko.observable();
+  crazy1ViewModel.selectedDoughDisplayText = ko.computed(function () {
+    return (crazy1ViewModel.selectedDough() !== undefined) ? crazy1ViewModel.selectedDough().name : '';
+  });
 
-        self.showSelectedDough = ko.computed(function () {
-            return self.selectedDough() !== undefined;
-        });
-        
-        self.selectedDoughDisplayText = ko.computed(function () {
-            return (self.selectedDough() !== undefined) ? self.selectedDough().name : '';
-        });
+  dataService.getDoughs().done(function (result) {
+    crazy1ViewModel.availableDoughs(result);
+  });
 
-        dataService = new DataService();
-        dataService.getDoughs().done(function (result) {
-            self.availableDoughs(result);
-        });
-    };
-
-    return crazy1ViewModel;
+  return crazy1ViewModel;
 
 });

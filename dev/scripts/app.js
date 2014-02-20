@@ -1,4 +1,4 @@
-define(["module", "knockout", "window", "router", "knockout-amd-helpers", "text"], function (module, ko, window, router) {
+define(["module", "knockout", "window", "navigationService", "knockout-amd-helpers", "text"], function (module, ko, window, navigationService) {
 
   ko.amdTemplateEngine.defaultPath = "../templates";
   ko.amdTemplateEngine.defaultSuffix = ".html";
@@ -17,11 +17,11 @@ define(["module", "knockout", "window", "router", "knockout-amd-helpers", "text"
     currentModule: ko.observable()
   };
 
-  router.addListener(function (path) {
+  navigationService.addListener(function (path) {
     app.currentModule(routes[path.toLowerCase()] || routes["*"]);
   });
 
-  router.startListening();
+  navigationService.startListening();
 
   window.setTimeout(function () {
     ko.applyBindings(app);

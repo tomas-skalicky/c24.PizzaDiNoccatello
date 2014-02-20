@@ -1,25 +1,21 @@
 define(["knockout", "basket"], function (ko, basket) {
 
-  var CheckoutViewModel;
+  var vm = {};
 
-  CheckoutViewModel = function () {
-    if (!(this instanceof CheckoutViewModel)) {
-        return new CheckoutViewModel();
-    }
+  vm.isClosed = ko.observable(false);
+  vm.name = ko.observable("");
+  vm.street = ko.observable("");
+  vm.postalCode = ko.observable("");
+  vm.city = ko.observable("");
 
-    this.isClosed = ko.observable(false);
-    this.name = ko.observable("");
-    this.street = ko.observable("");
-    this.postalCode = ko.observable("");
-    this.city = ko.observable("");
-    this.canConfirm = ko.computed((function () {
-        return !!(this.name() && this.street() && this.postalCode() && this.city() && !basket.isEmpty());
-    }).bind(this));
-    this.confirm = (function () {
-        this.isClosed(true);
-    }).bind(this);
+  vm.canConfirm = ko.computed(function () {
+      return !!(vm.name() && vm.street() && vm.postalCode() && vm.city() && !basket.isEmpty());
+  });
+
+  vm.confirm = function () {
+      vm.isClosed(true);
   };
 
-  return CheckoutViewModel;
+  return vm;
 
 });
