@@ -13,7 +13,7 @@ define(["squire"], function (Squire) {
           host: "pizza-di-noccatello.it",
           pathname: "/online-trattoria/",
           search: "",
-          hash: "#/crazy/doughs",
+          hash: "#/crazy/layers",
           replace: function (newHref) {
             windowFake.location.href = newHref;
           }
@@ -45,7 +45,7 @@ define(["squire"], function (Squire) {
           listeners.forEach(navigationService.addListener);
           navigationService.startListening();
           listeners.forEach(function (listener) {
-            expect(listener).toHaveBeenCalledWith("crazy/doughs");
+            expect(listener).toHaveBeenCalledWith("crazy/layers");
           });
           done();
         });
@@ -61,7 +61,7 @@ define(["squire"], function (Squire) {
           windowFake.location.hash = "#/crazy/ingredients";
           windowFake._triggerEvent();
           listeners.forEach(function (listener) {
-            expect(listener).toHaveBeenCalledWith("crazy/doughs");
+            expect(listener).toHaveBeenCalledWith("crazy/layers");
             expect(listener).toHaveBeenCalledWith("crazy/ingredients");
           });
           done();
@@ -72,7 +72,7 @@ define(["squire"], function (Squire) {
       new Squire()
         .mock("window", windowFake)
         .require(["navigationService"], function (navigationService) {
-          expect(navigationService.getCurrentPath()).toEqual("crazy/doughs");
+          expect(navigationService.getCurrentPath()).toEqual("crazy/layers");
           done();
         });
     });     

@@ -3,7 +3,7 @@ define(["knockout", "navigationService"], function (ko, navigationService) {
   var homeViewModel = {},
       availableOptions = {
         "Order à la carte": "#/menu",
-        "Go crazy": "#/crazy/doughs"
+        "Go crazy": "#/crazy/layers"
       };
 
   homeViewModel.availableOptions = ko.observableArray(Object.keys(availableOptions));

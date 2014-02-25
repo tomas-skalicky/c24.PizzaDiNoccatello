@@ -33,7 +33,7 @@ define(["pajamas", "q"], function (pj, Q) {
     getSizes: function () {
       return getOrSetCachedItem("sizes", function () { return webGet("sizes"); });
     },
-    getDoughs: function () {
+    getLayers: function () {
       return getOrSetCachedItem("basepizzas", function () { return webGet("basepizzas"); });
     },
     getIngredients: function () {
