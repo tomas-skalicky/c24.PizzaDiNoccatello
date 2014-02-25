@@ -147,7 +147,7 @@ module.exports = function (grunt) {
             "dist/styles/main.css",
             "dist/styles/home.css",
             "dist/styles/menu.css",
-            "dist/styles/crazy1.css",
+            "dist/styles/goCrazySelectLayer.css",
             "dist/styles/crazy2.css",
             "dist/styles/checkout.css",
             "dist/styles/notfound.css",
