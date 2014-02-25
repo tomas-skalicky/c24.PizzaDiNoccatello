@@ -18,11 +18,11 @@ module.exports = function (grunt) {
         src: ["dist/index.html"],
         dest: "dist/index.html",
         replacements: [{ 
-          from: "<script data-main=\"main.dev\" src=\"bower_components/requirejs/require.js\"></script>",
+          from: /<!--\s*BUILD\s*\:\s*Scripts\s*-->[\S\s]*?<!--\s*\/\s*BUILD\s*\:\s*Scripts\s*-->/g,
           to: "<script src=\"main.min.js\"></script>"
-        }, {
-          from: "<script src=\"//localhost:35729/livereload.js\"></script>",
-          to: ""
+        }, { 
+          from: /<!--\s*BUILD\s*\:\s*Styles\s*-->[\S\s]*?<!--\s*\/\s*BUILD\s*\:\s*Styles\s*-->/g,
+          to: "<link rel=\"stylesheet\" href=\"styles/all.min.css\">"
         }]
       }
     },
@@ -122,6 +122,13 @@ module.exports = function (grunt) {
           expand: true,
           nonull: true
         }, {
+          cwd: "dev/styles/",
+          src: "**",
+          dest: "dist/styles/",
+          filter: "isFile",
+          expand: true,
+          nonull: true
+        }, {
           src: "dev/index.html",
           dest: "dist/index.html"
         }]
@@ -132,14 +139,32 @@ module.exports = function (grunt) {
         src: ["dev/bower_components/requirejs/require.js", "dist/main.js"],
         dest: "dist/main.js"
       }
+    },
+    cssmin: {
+      combine: {
+        files: {
+          "dist/styles/all.min.css": [
+            "dist/styles/main.css",
+            "dist/styles/home.css",
+            "dist/styles/menu.css",
+            "dist/styles/crazy1.css",
+            "dist/styles/crazy2.css",
+            "dist/styles/checkout.css",
+            "dist/styles/notfound.css",
+            "dist/styles/allaCarteMenu.css",
+            "dist/styles/basket.css"
+          ]
+        }
+      }
     }
   });
 
-  grunt.registerTask("default", ["test-unit", "clean", "build-html", "build-js"]);
+  grunt.registerTask("default", ["test-unit", "clean", "build-html", "build-js", "build-css"]);
   grunt.registerTask("live", ["default", "connect:dev", "open:dev", "watch:dev"]);
   grunt.registerTask("test-unit", ["jshint", "karma:unit"]);
   grunt.registerTask("test-integration", ["jshint", "karma:integration"]);
   grunt.registerTask("build-html", ["copy", "replace", "prettify"]);
   grunt.registerTask("build-js", ["requirejs", "concat", "uglify"]);
+  grunt.registerTask("build-css", ["cssmin"]);
 
 };
