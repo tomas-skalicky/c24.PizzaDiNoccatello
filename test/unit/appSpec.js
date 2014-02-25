@@ -64,11 +64,11 @@ define(["squire"], function (Squire) {
           });
       });
 
-      async.it("should be 'goCrazySelectLayer' after navigating to 'crAzY/dOugHs' (case insensitivity)", function (done) {
+      async.it("should be 'goCrazySelectLayer' after navigating to 'crAzY/lAyErs' (case insensitivity)", function (done) {
         new Squire()
           .mock("navigationService", navigationServiceFake)
           .require(["app"], function (app) {
-            navigationServiceFake.navigateTo("crAzY/dOugHs");
+            navigationServiceFake.navigateTo("crAzY/lAyErs");
             expect(app.currentModule()).toEqual("goCrazySelectLayer");
             done();
           });

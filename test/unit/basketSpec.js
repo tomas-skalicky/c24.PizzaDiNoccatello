@@ -103,7 +103,7 @@ define(["basket"], function (basket) {
         basket.removeLayer();
         expect(basket.total()).toBe(0);
       });
-      it("should have only one layer after inserting another dough", function () {
+      it("should have only one layer after inserting another layer", function () {
         basket.addLayer({ id: "dgf", name: "Gluten free", price: 4.5 });
         expect(basket.items().length).toBe(1);
         expect(basket.items()[0].data.name).toBe("Gluten free");
