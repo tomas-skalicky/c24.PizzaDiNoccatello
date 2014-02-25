@@ -1,11 +1,6 @@
-<h2>This is template "crazy1"</h2>
-<h3 data-bind="visible: showSelectedDough">You want <span data-bind="	text: selectedDoughDisplayText"></span></h3>
-<div data-bind="foreach: availableDoughs">
-        <label>
-            <input type="radio" 
-                   name="availableDoughs" 
-                   data-bind="checkedValue: $data, checked: $parent.selectedDough" />
-            <span data-bind="text: name"></span>
-            <span data-bind="text: price"></span>
-        </label><br/>
-</div>
+<h2>This is template "menu"</h2>
+<p data-bind="text: message"></p>
+<div class="menuSelectLayer" data-bind="module: 'menuSelectLayer'"></div>
+<aside class="basket" data-bind="module: 'basket'"></aside>
+
+

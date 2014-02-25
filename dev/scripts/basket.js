@@ -4,14 +4,14 @@ define(["knockout", "utils"], function (ko, utils) {
       total,
       isEmpty,
       hasPizzas,
-      hasDough,
+      hasLayer,
       hasToppings,
       isCrazy,
       reset,
       addPizza,
       removePizza,
-      addDough,
-      removeDough,
+      addLayer,
+      removeLayer,
       addTopping,
       removeTopping,
       cloneItem,
@@ -20,7 +20,7 @@ define(["knockout", "utils"], function (ko, utils) {
       hasItem,
       removeLastItem,
       ITEM_TYPE_PIZZA = 0,
-      ITEM_TYPE_DOUGH = 1,
+      ITEM_TYPE_LAYER = 1,
       ITEM_TYPE_TOPPING = 2;
 
   items = ko.observableArray([]);
@@ -41,9 +41,9 @@ define(["knockout", "utils"], function (ko, utils) {
     });
   });
 
-  hasDough = ko.computed(function () {
+  hasLayer = ko.computed(function () {
     return items().some(function (item) {
-      return item.type === ITEM_TYPE_DOUGH;
+      return item.type === ITEM_TYPE_LAYER;
     });
   });
 
@@ -54,7 +54,7 @@ define(["knockout", "utils"], function (ko, utils) {
   });
 
   isCrazy = ko.computed(function () {
-    return hasDough() || hasToppings();
+    return hasLayer() || hasToppings();
   });
 
   reset = function () {
@@ -76,21 +76,21 @@ define(["knockout", "utils"], function (ko, utils) {
     return removeLastItem(ITEM_TYPE_PIZZA, pizzaId);
   };
 
-  addDough = function (dough) {
+  addLayer = function (dough) {
     if (hasPizzas()) {
       reset();
     }
-    removeDough(); // There can be only one!
+    removeLayer(); // There can be only one!
     items.push({
-      type: ITEM_TYPE_DOUGH,
+      type: ITEM_TYPE_LAYER,
       data: dough
     });
     items.sort(basketSort);
   };
 
-  removeDough = function () {
+  removeLayer = function () {
     items.remove(function (item) {
-      return item.type === ITEM_TYPE_DOUGH;
+      return item.type === ITEM_TYPE_LAYER;
     });
   };
 
@@ -157,20 +157,20 @@ define(["knockout", "utils"], function (ko, utils) {
     total: total,
     isEmpty: isEmpty,
     hasPizzas: hasPizzas,
-    hasDough: hasDough,
+    hasLayer: hasLayer,
     hasToppings: hasToppings,
     isCrazy: isCrazy,
     reset: reset,
     addPizza: addPizza,
     removePizza: removePizza,
-    addDough: addDough,
-    removeDough: removeDough,
+    addLayer: addLayer,
+    removeLayer: removeLayer,
     addTopping: addTopping,
     removeTopping: removeTopping,
     cloneItem: cloneItem,
     removeItem: removeItem,
     ITEM_TYPE_PIZZA: ITEM_TYPE_PIZZA,
-    ITEM_TYPE_DOUGH: ITEM_TYPE_DOUGH,
+    ITEM_TYPE_LAYER: ITEM_TYPE_LAYER,
     ITEM_TYPE_TOPPING: ITEM_TYPE_TOPPING
   };
 
