@@ -76,14 +76,14 @@ define(["knockout", "utils"], function (ko, utils) {
     return removeLastItem(ITEM_TYPE_PIZZA, pizzaId);
   };
 
-  addLayer = function (dough) {
+  addLayer = function (layer) {
     if (hasPizzas()) {
       reset();
     }
     removeLayer(); // There can be only one!
     items.push({
       type: ITEM_TYPE_LAYER,
-      data: dough
+      data: layer
     });
     items.sort(basketSort);
   };

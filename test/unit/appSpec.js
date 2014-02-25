@@ -54,11 +54,11 @@ define(["squire"], function (Squire) {
           });
       });
 
-      async.it("should be 'goCrazySelectLayer' after navigating to 'crazy/doughs'", function (done) {
+      async.it("should be 'goCrazySelectLayer' after navigating to 'crazy/layers'", function (done) {
         new Squire()
           .mock("navigationService", navigationServiceFake)
           .require(["app"], function (app) {
-            navigationServiceFake.navigateTo("crazy/doughs");
+            navigationServiceFake.navigateTo("crazy/layers");
             expect(app.currentModule()).toEqual("goCrazySelectLayer");
             done();
           });
