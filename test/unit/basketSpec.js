@@ -17,8 +17,8 @@ define(["basket"], function (basket) {
       it("should have a total of 0", function () {
         expect(basket.total()).toBe(0);
       });
-      it("should not have dough", function () {
-        expect(basket.hasDough()).toBe(false);
+      it("should not have layer", function () {
+        expect(basket.hasLayer()).toBe(false);
       });
       it("should not have toppings", function () {
         expect(basket.hasToppings()).toBe(false);
@@ -43,8 +43,8 @@ define(["basket"], function (basket) {
       it("should calculate total correctly", function () {
         expect(basket.total()).toBe(23.5);
       });
-      it("should not have dough", function () {
-        expect(basket.hasDough()).toBe(false);
+      it("should not have layer", function () {
+        expect(basket.hasLayer()).toBe(false);
       });
       it("should have pizzas", function () {
         expect(basket.hasPizzas()).toBe(true);
@@ -70,9 +70,9 @@ define(["basket"], function (basket) {
       });
     });
 
-    describe("when dough has been inserted", function () {
+    describe("when layer has been inserted", function () {
       beforeEach(function () {
-        basket.addDough({ id: "dw", name: "Wheat", price: 2.5 });
+        basket.addLayer({ id: "dw", name: "Wheat", price: 2.5 });
       });
       it("should not be empty", function () {
         expect(basket.isEmpty()).toBe(false);
@@ -86,8 +86,8 @@ define(["basket"], function (basket) {
       it("should not have pizzas", function () {
         expect(basket.hasPizzas()).toBe(false);
       });
-      it("should have dough", function () {
-        expect(basket.hasDough()).toBe(true);
+      it("should have layer", function () {
+        expect(basket.hasLayer()).toBe(true);
       });
       it("should not have toppings", function () {
         expect(basket.hasToppings()).toBe(false);
@@ -95,16 +95,16 @@ define(["basket"], function (basket) {
       it("should be crazy", function () {
         expect(basket.isCrazy()).toBe(true);
       });
-      it("should calculate length correctly after removing dough", function () {
-        basket.removeDough();
+      it("should calculate length correctly after removing layer", function () {
+        basket.removeLayer();
         expect(basket.items().length).toBe(0);
       });
-      it("should calculate total correctly after removing dough", function () {
-        basket.removeDough();
+      it("should calculate total correctly after removing layer", function () {
+        basket.removeLayer();
         expect(basket.total()).toBe(0);
       });
-      it("should have only one dough after inserting another dough", function () {
-        basket.addDough({ id: "dgf", name: "Gluten free", price: 4.5 });
+      it("should have only one layer after inserting another layer", function () {
+        basket.addLayer({ id: "dgf", name: "Gluten free", price: 4.5 });
         expect(basket.items().length).toBe(1);
         expect(basket.items()[0].data.name).toBe("Gluten free");
       });
@@ -128,8 +128,8 @@ define(["basket"], function (basket) {
       it("should not have pizzas", function () {
         expect(basket.hasPizzas()).toBe(false);
       });
-      it("should not have dough", function () {
-        expect(basket.hasDough()).toBe(false);
+      it("should not have layer", function () {
+        expect(basket.hasLayer()).toBe(false);
       });
       it("should have toppings", function () {
         expect(basket.hasToppings()).toBe(true);
@@ -157,26 +157,26 @@ define(["basket"], function (basket) {
         basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
         basket.addPizza({ id: "ps", name: "Salame", price: 8 });
       });
-      it("should switch to 'crazy' mode and drop all pizzas when inserting a dough", function () {
-        basket.addDough({ id: "dw", name: "Wheat", price: 2.5 });
+      it("should switch to 'crazy' mode and drop all pizzas when inserting a layer", function () {
+        basket.addLayer({ id: "dw", name: "Wheat", price: 2.5 });
         expect(basket.hasPizzas()).toBe(false);
         expect(basket.isCrazy()).toBe(true);
       });
-      it("should contain only the new item when inserting a dough", function () {
-        basket.addDough({ id: "dw", name: "Wheat", price: 2.5 });
+      it("should contain only the new item when inserting a layer", function () {
+        basket.addLayer({ id: "dw", name: "Wheat", price: 2.5 });
         expect(basket.items().length).toBe(1);
         expect(basket.items()[0].data.name).toBe("Wheat");
       });
     });
 
-    describe("when it is in 'crazy' mode (contains dough and toppings)", function () {
+    describe("when it is in 'crazy' mode (contains layer and toppings)", function () {
       beforeEach(function () {
-        basket.addDough({ id: "dw", name: "Wheat", price: 2.5 });
+        basket.addLayer({ id: "dw", name: "Wheat", price: 2.5 });
         basket.addTopping({ id: "tt", name: "Tomatoes", price: 1.5 });
         basket.addTopping({ id: "ts", name: "Salame", price: 2.5 });
         basket.addTopping({ id: "tm", name: "Mozzarella", price: 3 });
       });
-      it("should switch to 'à la carte' mode and drop all dough/toppings when inserting a pizza", function () {
+      it("should switch to 'à la carte' mode and drop all layer/toppings when inserting a pizza", function () {
         basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
         expect(basket.isCrazy()).toBe(false);
         expect(basket.hasPizzas()).toBe(true);
