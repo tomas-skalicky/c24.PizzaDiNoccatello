@@ -1,12 +1,9 @@
-define(["knockout", "basket"], function (ko, basket) {
-  var pizzas = ko.observableArray([]),
-      addPizza,
+define(["knockout", "dataService", "basket"], function (ko, dataService, basket) {
+  var pizzas,
       isEmpty,
       selectPizza;
 
-  addPizza = function (pizza) {
-    pizzas.push(pizza);
-  };
+  pizzas = ko.observableArray();
 
   isEmpty = ko.computed(function () {
     return pizzas().length === 0;
@@ -16,10 +13,13 @@ define(["knockout", "basket"], function (ko, basket) {
     basket.addPizza(pizza);
   };
 
+  if (isEmpty()) {
+    dataService.getPizzas().then(pizzas);
+  }
+
   return {
-    pizzas : pizzas,
-    addPizza : addPizza,
-    isEmpty : isEmpty,
-    selectPizza : selectPizza
+    pizzas: pizzas,
+    isEmpty: isEmpty,
+    selectPizza: selectPizza
   };
 });

@@ -1,22 +1,12 @@
-define(["knockout", "allaCarteMenu", "dataService", "basket"], function (ko, allaCarteMenu, dataService, basket) {
+define(["knockout", "basket"], function (ko, basket) {
 
-  var menuViewModel = {};
-
-  menuViewModel.initialize = function (){
-    if (basket.isCrazy()){
-      basket.reset();
+  var menuViewModel = {
+    initialize: function () {
+      if (basket.isCrazy()) {
+        basket.reset();
+      }
     }
   };
-
-  if (allaCarteMenu.isEmpty()) {
-    dataService
-      .getPizzas()
-      .then(function (pizzas) {
-        pizzas.forEach(function (pizza) {
-          allaCarteMenu.addPizza(pizza);
-        });
-      });
-  }
 
   return menuViewModel;
 

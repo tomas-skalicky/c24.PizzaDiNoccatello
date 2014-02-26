@@ -1,28 +1,37 @@
-define(["squire", "q"], function (Squire, Q) {
-    describe("On menu alla Carte", function (){
-        describe("When the menu is created", function () {
-            var menuViewModel,
-                dataServiceMock,
-                injector,
-                async = new AsyncSpec(this);
-           
-            async.beforeEach(function (done){
-                dataServiceMock = jasmine.createSpyObj("dataService", ["getPizzas"]);
-                dataServiceMock.getPizzas.andReturn(Q.when([{}]));
+define(["squire"], function (Squire) {
 
-                injector = new Squire();
-                injector.mock("dataService", function () {
-                    return dataServiceMock;
-                });
-                
-                injector.require(["menu"], function (menuViewModel){
-                    done();
-                });
-            });
+  describe("Menu", function () {
 
-            it ("should call the express server", function () {
-                expect(dataServiceMock.getPizzas).toHaveBeenCalled();
+    describe("When initialized", function () {
+
+      describe("when the basket is in crazy mode", function () {
+
+        var async = new AsyncSpec(this),
+            resetSpy = jasmine.createSpy("resetSpy"),
+            basketMock = {
+              isCrazy: function () {
+                return true;
+              },
+              reset: resetSpy
+            };
+
+        async.beforeEach(function (done) {
+          new Squire()
+            .mock("basket", basketMock)
+            .require(["menu"], function (menu) {
+              menu.initialize();
+              done();
             });
         });
+
+        it ("should reset the basket", function () {
+          expect(resetSpy).toHaveBeenCalled();
+        });
+
+      });
+
     });
+
+  });
+
 });
