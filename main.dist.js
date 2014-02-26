@@ -13,7 +13,17 @@ require.config({
     "pajamas": "../bower_components/pajamas/src/pajamas",
     "q": "../bower_components/q/q",
     "dataService": "services/dataService",
-    "navigationService": "services/navigationService"
+    "navigationService": "services/navigationService",
+    "allaCarteMenu": "viewmodels/allaCarteMenu",
+    "allaCartePage": "viewmodels/allaCartePage",
+    "app": "viewmodels/app",
+    "basket": "viewmodels/basket",
+    "checkoutPage": "viewmodels/checkoutPage",
+    "homePage": "viewmodels/homePage",
+    "menuSelectLayer": "viewmodels/menuSelectLayer",
+    "notfoundPage": "viewmodels/notfoundPage",
+    "selectLayerPage": "viewmodels/selectLayerPage",
+    "selectToppingsPage": "viewmodels/selectToppingsPage"
   },
   "urlArgs": "version=" +  (new Date()).getTime()
 });

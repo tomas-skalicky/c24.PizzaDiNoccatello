@@ -18,7 +18,17 @@ require.config({
     "q": "../bower_components/q/q",
     "squire": "../bower_components/squire/src/Squire",
     "dataService": "services/dataService",
-    "navigationService": "services/navigationService"
+    "navigationService": "services/navigationService",
+    "allaCarteMenu": "viewmodels/allaCarteMenu",
+    "allaCartePage": "viewmodels/allaCartePage",
+    "app": "viewmodels/app",
+    "basket": "viewmodels/basket",
+    "checkoutPage": "viewmodels/checkoutPage",
+    "homePage": "viewmodels/homePage",
+    "menuSelectLayer": "viewmodels/menuSelectLayer",
+    "notfoundPage": "viewmodels/notfoundPage",
+    "selectLayerPage": "viewmodels/selectLayerPage",
+    "selectToppingsPage": "viewmodels/selectToppingsPage"
   }
 });
 
