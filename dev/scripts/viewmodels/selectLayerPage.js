@@ -1,24 +1,26 @@
-define(["knockout", "menuSelectLayer", "dataService", "basket"], function (ko, menuSelectLayer, dataService, basket) {
+define(["knockout", "dataService", "basketSection"], function (ko, dataService, basket) {
 
-  var selectLayerViewModel = {};
-
-  selectLayerViewModel.initialize = function (){
-    if (!basket.isCrazy()){
-      basket.reset();
+  var viewModel = {
+    initialize: function () {
+      if (!basket.isCrazy()) {
+        basket.reset();
+      }
     }
   };
 
-  selectLayerViewModel.message = ko.observable("This message comes from the goCrazyViewModel");
-  
-  if (menuSelectLayer.isEmpty()){
-	dataService.getLayers()
-             .then(function(layers){
-                layers.forEach(function (layer) {
-                  menuSelectLayer.addLayer(layer);
-                });
-             });
+  viewModel.items = ko.observableArray();
+
+  viewModel.isEmpty = ko.computed(function () {
+    return viewModel.items().length === 0;
+  });
+
+  viewModel.selectItem = function (item) {
+    basket.addLayer(item);
+  };
+
+  if (viewModel.isEmpty()) {
+    dataService.getLayers().then(viewModel.items);
   }
 
-  return selectLayerViewModel;
-
+  return viewModel;
 });

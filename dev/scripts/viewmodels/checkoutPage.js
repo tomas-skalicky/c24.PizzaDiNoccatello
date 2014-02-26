@@ -1,4 +1,4 @@
-define(["knockout", "basket"], function (ko, basket) {
+define(["knockout", "basketSection"], function (ko, basket) {
 
   var vm = {};
 

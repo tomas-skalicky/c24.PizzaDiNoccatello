@@ -14,7 +14,7 @@ define(["squire"], function (Squire) {
     describe("when a new instance is created", function () {
       async.it("should have empty fields for the address", function (done) {
         new Squire()
-          .mock("basket", nonEmptyBasket)
+          .mock("basketSection", nonEmptyBasket)
           .require(["checkoutPage"], function (checkout) {
             expect(checkout.name()).toBe("");
             expect(checkout.street()).toBe("");
@@ -25,7 +25,7 @@ define(["squire"], function (Squire) {
       });
       async.it("should not be closed", function (done) {
         new Squire()
-          .mock("basket", nonEmptyBasket)
+          .mock("basketSection", nonEmptyBasket)
           .require(["checkoutPage"], function (checkout) {
             expect(checkout.isClosed()).toBe(false);
             done();
@@ -33,7 +33,7 @@ define(["squire"], function (Squire) {
       });
       async.it("should not be confirmable", function (done) {
         new Squire()
-          .mock("basket", nonEmptyBasket)
+          .mock("basketSection", nonEmptyBasket)
           .require(["checkoutPage"], function (checkout) {
             expect(checkout.canConfirm()).toBe(false);
             done();
@@ -44,7 +44,7 @@ define(["squire"], function (Squire) {
     describe("when all fields have values", function () {
       async.it("should not be confirmable for an empty basket", function (done) {
         new Squire()
-          .mock("basket", emptyBasket)
+          .mock("basketSection", emptyBasket)
           .require(["checkoutPage"], function (checkout) {
             setNameAndAddress(checkout);
             expect(checkout.canConfirm()).toBe(false);
@@ -53,7 +53,7 @@ define(["squire"], function (Squire) {
       });
       async.it("should be confirmable for a non-empty basket", function (done) {
         new Squire()
-          .mock("basket", nonEmptyBasket)
+          .mock("basketSection", nonEmptyBasket)
           .require(["checkoutPage"], function (checkout) {
             setNameAndAddress(checkout);
             expect(checkout.canConfirm()).toBe(true);
@@ -65,7 +65,7 @@ define(["squire"], function (Squire) {
     describe("when the order is confirmed", function () {
       async.it("should 'isClosed' to 'true'", function (done) {
         new Squire()
-          .mock("basket", nonEmptyBasket)
+          .mock("basketSection", nonEmptyBasket)
           .require(["checkoutPage"], function (checkout) {
             setNameAndAddress(checkout);
             checkout.confirm();

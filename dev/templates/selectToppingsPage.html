@@ -1,2 +1,28 @@
-<h2>This is template "crazy2"</h2>
-<p data-bind="text: message"></p>
+<h2>This is template "menu"</h2>
+<div data-bind="visible: isEmpty">
+    <p> Ooops! Our Kitchen is having problems with the delivery! Please try it later. </p>
+</div>
+
+<table data-bind="visible: !isEmpty()">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: items">
+        <tr>
+            <td>
+                <span data-bind="text: name"> </span>
+            </td>
+            <td>
+                <span data-bind="text: price.toFixed(2)"></span>&nbsp;EUR
+            </td>
+            <td>
+                <button data-bind="click: $parent.selectItem">Select</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<aside class="basket" data-bind="module: 'basketSection'"></aside>

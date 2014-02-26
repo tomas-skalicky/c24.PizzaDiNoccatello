@@ -1,6 +1,6 @@
-define(["basket"], function (basket) {
+define(["basketSection"], function (basket) {
 
-  describe("basket", function () {
+  describe("basketSection", function () {
 
     beforeEach(function () {
       basket.reset();
