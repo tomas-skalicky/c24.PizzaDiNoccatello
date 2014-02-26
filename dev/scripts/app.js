@@ -5,7 +5,7 @@ define(["module", "knockout", "window", "navigationService", "knockout-amd-helpe
 
   // Mapping path -> module:
   var routes = {
-    ""                 : "home",
+    ""                 : "homePage",
     "crazy/layers"     : "goCrazySelectLayer",
     "crazy/ingredients": "crazy2",
     "allacarte"        : "allaCartePage",

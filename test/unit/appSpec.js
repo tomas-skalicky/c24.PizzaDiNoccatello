@@ -49,7 +49,7 @@ define(["squire"], function (Squire) {
         new Squire()
           .mock("navigationService", navigationServiceFake)
           .require(["app"], function (app) {
-            expect(app.currentModule()).toEqual("home");
+            expect(app.currentModule()).toEqual("homePage");
             done();
           });
       });
