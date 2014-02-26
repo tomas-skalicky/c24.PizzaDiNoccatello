@@ -59,7 +59,7 @@ define(["squire"], function (Squire) {
           .mock("navigationService", navigationServiceFake)
           .require(["app"], function (app) {
             navigationServiceFake.navigateTo("crazy/layers");
-            expect(app.currentModule()).toEqual("goCrazySelectLayer");
+            expect(app.currentModule()).toEqual("selectLayerPage");
             done();
           });
       });
@@ -69,7 +69,7 @@ define(["squire"], function (Squire) {
           .mock("navigationService", navigationServiceFake)
           .require(["app"], function (app) {
             navigationServiceFake.navigateTo("crAzY/lAyErs");
-            expect(app.currentModule()).toEqual("goCrazySelectLayer");
+            expect(app.currentModule()).toEqual("selectLayerPage");
             done();
           });
       });

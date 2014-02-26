@@ -19,7 +19,7 @@ define(["squire", "q"], function (Squire, Q) {
                 return dataServiceMock;
             });
             
-            injector.require(["goCrazySelectLayer"], function (selectLayerViewModel){
+            injector.require(["selectLayerPage"], function (selectLayerViewModel){
                 done();
             });
         });
