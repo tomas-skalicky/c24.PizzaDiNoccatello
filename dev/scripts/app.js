@@ -10,7 +10,7 @@ define(["module", "knockout", "window", "navigationService", "knockout-amd-helpe
     "crazy/ingredients": "crazy2",
     "allacarte"        : "allaCartePage",
     "checkout"         : "checkout",
-    "*"                : "notfound" // fallback route!
+    "*"                : "notfoundPage" // fallback route!
   };
 
   var app = {

@@ -79,7 +79,7 @@ define(["squire"], function (Squire) {
           .mock("navigationService", navigationServiceFake)
           .require(["app"], function (app) {
             navigationServiceFake.navigateTo("not/valid");
-            expect(app.currentModule()).toEqual("notfound");
+            expect(app.currentModule()).toEqual("notfoundPage");
             done();
           });
       });
