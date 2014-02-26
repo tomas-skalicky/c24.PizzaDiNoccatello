@@ -16,7 +16,9 @@ require.config({
     "knockout-amd-helpers": "../bower_components/knockout-amd-helpers/build/knockout-amd-helpers",
     "pajamas": "../bower_components/pajamas/src/pajamas",
     "q": "../bower_components/q/q",
-    "squire": "../bower_components/squire/src/Squire"
+    "squire": "../bower_components/squire/src/Squire",
+    "dataService": "services/dataService",
+    "navigationService": "services/navigationService"
   }
 });
 
