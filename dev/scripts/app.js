@@ -7,7 +7,7 @@ define(["module", "knockout", "window", "navigationService", "knockout-amd-helpe
   var routes = {
     ""                 : "homePage",
     "crazy/layers"     : "selectLayerPage",
-    "crazy/ingredients": "crazy2",
+    "crazy/ingredients": "selectToppingsPage",
     "allacarte"        : "allaCartePage",
     "checkout"         : "checkoutPage",
     "*"                : "notfoundPage" // fallback route!
