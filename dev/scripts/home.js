@@ -2,7 +2,7 @@ define(["knockout", "navigationService"], function (ko, navigationService) {
 
   var homeViewModel = {},
       availableOptions = {
-        "Order à la carte": "#/menu",
+        "Order à la carte": "#/allacarte",
         "Go crazy": "#/crazy/layers"
       };
 

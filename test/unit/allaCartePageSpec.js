@@ -18,7 +18,7 @@ define(["squire"], function (Squire) {
         async.beforeEach(function (done) {
           new Squire()
             .mock("basket", basketMock)
-            .require(["menu"], function (menu) {
+            .require(["allaCartePage"], function (menu) {
               menu.initialize();
               done();
             });

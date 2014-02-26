@@ -53,7 +53,7 @@ module.exports = function (grunt) {
       dist: {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         options: {
-          include: ["app", "home", "menu", "goCrazySelectLayer", "crazy2", "checkout", "notfound"],
+          include: ["app", "home", "allaCartePage", "goCrazySelectLayer", "crazy2", "checkout", "notfound"],
           insertRequire: ["app"],
           mainConfigFile: "main.dist.js",
           out: "dist/main.js",
