@@ -144,15 +144,13 @@ module.exports = function (grunt) {
       combine: {
         files: {
           "dist/styles/all.min.css": [
+            "dist/styles/allaCartePage.css",
+            "dist/styles/basketSection.css",
+            "dist/styles/homePage.css",
             "dist/styles/main.css",
-            "dist/styles/home.css",
-            "dist/styles/menu.css",
-            "dist/styles/goCrazySelectLayer.css",
-            "dist/styles/crazy2.css",
-            "dist/styles/checkout.css",
-            "dist/styles/notfound.css",
-            "dist/styles/allaCarteMenu.css",
-            "dist/styles/basket.css"
+            "dist/styles/notfoundPage.css",
+            "dist/styles/selectLayerPage.css",
+            "dist/styles/selectToppingsPage.css"
           ]
         }
       }
