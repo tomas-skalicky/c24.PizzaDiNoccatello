@@ -1,19 +1,19 @@
-.checkout fieldset {
+.checkoutPage fieldset {
     margin: 0;
     padding: 0;
     border-width: 0;
     width: 500px;
 }
 
-.checkout fieldset table {
+.checkoutPage fieldset table {
     width: 100%;
     margin-top: 25px;
 }
 
-.checkout fieldset table td {
+.checkoutPage fieldset table td {
     padding: 5px 0;
 }
 
-.checkout fieldset button {
+.checkoutPage fieldset button {
     margin-top: 25px;
 }

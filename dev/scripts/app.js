@@ -9,7 +9,7 @@ define(["module", "knockout", "window", "navigationService", "knockout-amd-helpe
     "crazy/layers"     : "goCrazySelectLayer",
     "crazy/ingredients": "crazy2",
     "allacarte"        : "allaCartePage",
-    "checkout"         : "checkout",
+    "checkout"         : "checkoutPage",
     "*"                : "notfoundPage" // fallback route!
   };
 
