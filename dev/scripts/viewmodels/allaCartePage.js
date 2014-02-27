@@ -18,6 +18,14 @@ define(["knockout", "dataService", "basketSection"], function (ko, dataService, 
     basket.addPizza(item);
   };
 
+  viewModel.canGoToCheckout = function () {
+    return basket.hasPizzas();
+  };
+
+  viewModel.goToCheckout = function () {
+    window.location.href = "#/checkout";
+  };
+
   if (viewModel.isEmpty()) {
     dataService.getPizzas().then(viewModel.items);
   }

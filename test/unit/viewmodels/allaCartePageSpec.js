@@ -85,6 +85,29 @@ define(["squire", "q"], function (Squire, Q) {
         expect(dataServiceMock.getPizzas).toHaveBeenCalled();
       });
 
+      describe("When the basket is empty", function () {
+        beforeEach(function () {
+          basket.reset();          
+        });
+        it("Should return canGoToCheckout false", function () {
+          expect(allaCartePage.canGoToCheckout()).toEqual(false);
+        });
+      });
+
+      describe("When the basket has a Pizza", function () {
+        beforeEach(function () {
+          basket.addPizza({name: 'Salami'});
+        });
+
+        it("Should return canGoToCheckout true", function () {
+          expect(allaCartePage.canGoToCheckout()).toEqual(true);
+        });
+
+        afterEach(function () {
+          basket.reset();
+        });
+      });
+
     });
 
   });
