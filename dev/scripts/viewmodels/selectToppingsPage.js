@@ -18,6 +18,14 @@ define(["knockout", "dataService", "basketSection"], function (ko, dataService, 
     basket.addTopping(item);
   };
 
+  viewModel.canGoToCheckout = function () {
+    return basket.hasLayer() && basket.hasToppings();
+  };
+
+  viewModel.goToCheckout = function () {
+    window.location.href = "#/checkout";
+  };
+
   if (viewModel.isEmpty()) {
     dataService.getIngredients().then(viewModel.items);
   }
