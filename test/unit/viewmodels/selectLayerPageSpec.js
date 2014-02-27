@@ -51,6 +51,31 @@ define(["squire", "q"], function (Squire, Q) {
 
     });
 
+    describe("When the basket is empty", function () {
+      beforeEach(function () {
+        basket.reset();
+      });
+
+      it ("Should return canSelectToppings false", function () {
+        expect(selectLayerPage.canSelectToppings()).toEqual(false);
+      });
+
+    });
+    
+    describe("When the basket contains a Layer", function () {
+      beforeEach(function () {
+        basket.addLayer({name: 'CornLayer'});
+      });
+
+      it("Should return canSelectToppings true", function () {
+        expect(selectLayerPage.canSelectToppings()).toEqual(true);
+      });
+
+      afterEach(function () {
+        basket.reset();
+      });
+    });
+
   });
 
 });

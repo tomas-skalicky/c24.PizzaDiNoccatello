@@ -18,9 +18,16 @@ define(["knockout", "dataService", "basketSection"], function (ko, dataService, 
     basket.addLayer(item);
   };
 
+  viewModel.canSelectToppings = function () {
+    return basket.hasLayer();
+  };
+
+  viewModel.goToSelectToppings = function (){
+     window.location.href = "#/crazy/ingredients";
+  };
+
   if (viewModel.isEmpty()) {
     dataService.getLayers().then(viewModel.items);
   }
-
   return viewModel;
 });
