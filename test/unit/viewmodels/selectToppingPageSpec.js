@@ -29,6 +29,17 @@ define(["squire", "q"], function (Squire, Q) {
       });
     });
 
+    describe("When goToLayers is executed", function () {
+      beforeEach(function () {
+        selectToppingsPage.goToLayers();
+      });
+
+      it ("should navigate to the checkout page", function () {
+        expect(navigationServiceMock.navigateTo).toHaveBeenCalledWith("#/crazy/layers");
+      });
+
+    });
+
     describe("When goToCheckout is executed", function () {
       beforeEach(function () {
         selectToppingsPage.goToCheckout();

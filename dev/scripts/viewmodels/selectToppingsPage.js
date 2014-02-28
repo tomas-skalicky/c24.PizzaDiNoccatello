@@ -18,8 +18,16 @@ define(["knockout", "dataService", "basketSection", "navigationService"], functi
     basket.addTopping(item);
   };
 
+  viewModel.basketContainsLayer = ko.computed (function () {
+    return basket.hasLayer();
+  });
+
   viewModel.canGoToCheckout = function () {
     return basket.hasLayer() && basket.hasToppings();
+  };
+
+  viewModel.goToLayers = function () {
+    navigationService.navigateTo("#/crazy/layers");
   };
 
   viewModel.goToCheckout = function () {

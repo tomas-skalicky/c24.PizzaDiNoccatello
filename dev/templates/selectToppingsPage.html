@@ -3,6 +3,11 @@
     <p> Ooops! Our Kitchen is having problems with the delivery! Please try it later. </p>
 </div>
 
+<div data-bind="visible: !basketContainsLayer()">
+    <p>A pizza without a layer is not a pizza. Please select a layer.</p>
+    <button data-bind="click: goToLayers"><b>Show me the layers</b></button>
+</div>
+
 <fieldset>
 
     <table data-bind="visible: !isEmpty()">
@@ -32,4 +37,4 @@
 
 </fieldset>
 
-<aside class="basketSection" data-bind="module: 'basketSection'"></aside>
+<aside class="basketSection" data-bind="module: {name: 'basketSection', template: 'basketSectionRemovable'}"></aside>
