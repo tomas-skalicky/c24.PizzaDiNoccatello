@@ -1,21 +1,25 @@
 define(["knockout", "basketSection"], function (ko, basket) {
 
-  var vm = {};
+  var viewModel = {};
 
-  vm.isClosed = ko.observable(false);
-  vm.name = ko.observable("");
-  vm.street = ko.observable("");
-  vm.postalCode = ko.observable("");
-  vm.city = ko.observable("");
-
-  vm.canConfirm = ko.computed(function () {
-      return !!(vm.name() && vm.street() && vm.postalCode() && vm.city() && !basket.isEmpty());
-  });
-
-  vm.confirm = function () {
-      vm.isClosed(true);
+  viewModel.initialize = function () {
+    viewModel.isClosed(false);
   };
 
-  return vm;
+  viewModel.isClosed = ko.observable(false);
+  viewModel.name = ko.observable("");
+  viewModel.street = ko.observable("");
+  viewModel.postalCode = ko.observable("");
+  viewModel.city = ko.observable("");
+
+  viewModel.canConfirm = ko.computed(function () {
+      return !!(viewModel.name() && viewModel.street() && viewModel.postalCode() && viewModel.city() && !basket.isEmpty());
+  });
+
+  viewModel.confirm = function () {
+      viewModel.isClosed(true);
+  };
+
+  return viewModel;
 
 });

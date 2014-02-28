@@ -1,2 +1,28 @@
-.selectLayerPage {
+.selectLayerPage fieldset {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    width: 500px;
+}
+
+.selectLayerPage fieldset table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.selectLayerPage fieldset table td {
+    padding: 5px 0;
+}
+
+.selectLayerPage fieldset button {
+    margin-top: 25px;
+}
+
+.selectLayerPage table {
+    width: 500px;
+}
+
+.selectLayerPage table td, .selectLayerPage table th {
+    text-align: left;
+    padding: 5px 0;
 }

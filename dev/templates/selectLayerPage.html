@@ -1,4 +1,4 @@
-<h2>This is template "menu"</h2>
+<h2>Select your pizza layer</h2>
 <div data-bind="visible: isEmpty">
     <p> Ooops! Our Kitchen is having problems with the delivery! Please try it later. </p>
 </div>
@@ -24,4 +24,8 @@
         </tr>
     </tbody>
 </table>
+
+    <button data-bind="enable: canSelectToppings(), click: goToSelectToppings"><b>Select Toppings</b></button>
+
+
 <aside class="basketSection" data-bind="module: 'basketSection'"></aside>

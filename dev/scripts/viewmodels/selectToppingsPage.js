@@ -1,4 +1,4 @@
-define(["knockout", "dataService", "basketSection"], function (ko, dataService, basket) {
+define(["knockout", "dataService", "basketSection", "navigationService"], function (ko, dataService, basket, navigationService) {
 
   var viewModel = {
     initialize: function () {
@@ -16,6 +16,14 @@ define(["knockout", "dataService", "basketSection"], function (ko, dataService, 
 
   viewModel.selectItem = function (item) {
     basket.addTopping(item);
+  };
+
+  viewModel.canGoToCheckout = function () {
+    return basket.hasLayer() && basket.hasToppings();
+  };
+
+  viewModel.goToCheckout = function () {
+    navigationService.navigateTo("#/checkout");
   };
 
   if (viewModel.isEmpty()) {

@@ -1,4 +1,4 @@
-define(["knockout", "dataService", "basketSection"], function (ko, dataService, basket) {
+define(["knockout", "dataService", "basketSection", "navigationService"], function (ko, dataService, basket, navigationService) {
 
   var viewModel = {
     initialize: function () {
@@ -18,9 +18,16 @@ define(["knockout", "dataService", "basketSection"], function (ko, dataService, 
     basket.addLayer(item);
   };
 
+  viewModel.canSelectToppings = function () {
+    return basket.hasLayer();
+  };
+
+  viewModel.goToSelectToppings = function (){
+    navigationService.navigateTo("#/crazy/ingredients");
+  };
+
   if (viewModel.isEmpty()) {
     dataService.getLayers().then(viewModel.items);
   }
-
   return viewModel;
 });

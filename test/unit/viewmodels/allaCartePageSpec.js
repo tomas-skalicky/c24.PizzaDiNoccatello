@@ -7,25 +7,42 @@ define(["squire", "q"], function (Squire, Q) {
       describe("when the basket is in crazy mode", function () {
 
         var async = new AsyncSpec(this),
+            navigateToSpy = jasmine.createSpy("navigateToSpy"),
+            navigationServiceMock = {
+              navigateTo: navigateToSpy
+            },
             resetSpy = jasmine.createSpy("resetSpy"),
             basketMock = {
               isCrazy: function () {
                 return true;
               },
               reset: resetSpy
-            };
+            },
+            allaCartePageViewModel;
 
         async.beforeEach(function (done) {
           new Squire()
             .mock("basketSection", basketMock)
+            .mock("navigationService", navigationServiceMock)
             .require(["allaCartePage"], function (menu) {
-              menu.initialize();
+              allaCartePageViewModel = menu;
+              allaCartePageViewModel.initialize();
               done();
             });
         });
 
         it ("should reset the basket", function () {
           expect(resetSpy).toHaveBeenCalled();
+        });
+
+        describe("When goToCheckout is executed", function () {
+          beforeEach(function () {
+            allaCartePageViewModel.goToCheckout();
+          });
+
+          it ("should call the navigateTo function from the navigationService", function () {
+            expect(navigateToSpy).toHaveBeenCalled();
+          });
         });
 
       });
@@ -83,6 +100,29 @@ define(["squire", "q"], function (Squire, Q) {
 
       it ("should call the express server", function () {
         expect(dataServiceMock.getPizzas).toHaveBeenCalled();
+      });
+
+      describe("When the basket is empty", function () {
+        beforeEach(function () {
+          basket.reset();          
+        });
+        it("Should return canGoToCheckout false", function () {
+          expect(allaCartePage.canGoToCheckout()).toEqual(false);
+        });
+      });
+
+      describe("When the basket has a Pizza", function () {
+        beforeEach(function () {
+          basket.addPizza({name: 'Salami'});
+        });
+
+        it("Should return canGoToCheckout true", function () {
+          expect(allaCartePage.canGoToCheckout()).toEqual(true);
+        });
+
+        afterEach(function () {
+          basket.reset();
+        });
       });
 
     });
