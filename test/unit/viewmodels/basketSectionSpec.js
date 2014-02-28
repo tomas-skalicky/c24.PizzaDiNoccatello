@@ -55,14 +55,6 @@ define(["basketSection"], function (basket) {
       it("should not be crazy", function () {
         expect(basket.isCrazy()).toBe(false);
       });
-      it("should calculate length correctly after removing pizzas", function () {
-        basket.removePizza("pm");
-        expect(basket.items().length).toBe(2);
-      });
-      it("should calculate total correctly after removing pizzas", function () {
-        basket.removePizza("pqs");
-        expect(basket.total()).toBe(15);
-      });
       it("should sort pizza items by name", function () {
         expect(basket.items()[0].data.name).toEqual("Margarita");
         expect(basket.items()[1].data.name).toEqual("Quattro Stagioni");
@@ -94,14 +86,6 @@ define(["basketSection"], function (basket) {
       });
       it("should be crazy", function () {
         expect(basket.isCrazy()).toBe(true);
-      });
-      it("should calculate length correctly after removing layer", function () {
-        basket.removeLayer();
-        expect(basket.items().length).toBe(0);
-      });
-      it("should calculate total correctly after removing layer", function () {
-        basket.removeLayer();
-        expect(basket.total()).toBe(0);
       });
       it("should have only one layer after inserting another layer", function () {
         basket.addLayer({ id: "dgf", name: "Gluten free", price: 4.5 });
@@ -136,14 +120,6 @@ define(["basketSection"], function (basket) {
       });
       it("should be crazy", function () {
         expect(basket.isCrazy()).toBe(true);
-      });
-      it("should calculate length correctly after removing toppings", function () {
-        basket.removeTopping("ts");
-        expect(basket.items().length).toBe(2);
-      });
-      it("should calculate total correctly after removing toppings", function () {
-        basket.removeTopping("ts");
-        expect(basket.total()).toBe(4.5);
       });
       it("should keep the toppings distinct even if one topping is inserted twice", function () {
         basket.addTopping({ id: "ts", name: "Salame", price: 2.5 });
