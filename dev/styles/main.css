@@ -4,6 +4,12 @@
     -webkit-box-sizing: border-box;
 }
 
+body > header a, body > header a:focus {
+  color: #eee;
+  text-decoration: none;
+  outline: none;
+}
+
 body > header {
     background: #006400;
     color: #eee;
@@ -33,24 +39,3 @@ body > footer {
     height: 6em;
 }
 
-
-
-/* Just for testing purposes: */
-
-menu {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    text-align: right;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-menu ul li {
-    display: inline-block;
-    margin-right: 1em;
-}
