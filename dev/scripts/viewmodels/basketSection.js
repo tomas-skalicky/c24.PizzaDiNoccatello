@@ -9,11 +9,8 @@ define(["knockout", "utils"], function (ko, utils) {
       isCrazy,
       reset,
       addPizza,
-      removePizza,
       addLayer,
-      removeLayer,
       addTopping,
-      removeTopping,
       cloneItem,
       removeItem,
       basketSort,
@@ -72,26 +69,19 @@ define(["knockout", "utils"], function (ko, utils) {
     items.sort(basketSort);
   };
 
-  removePizza = function (pizzaId) {
-    return removeLastItem(ITEM_TYPE_PIZZA, pizzaId);
-  };
-
   addLayer = function (layer) {
     if (hasPizzas()) {
       reset();
     }
-    removeLayer(); // There can be only one!
+    // There can be only one!
+    items.remove(function (item) {
+      return item.type === ITEM_TYPE_LAYER;
+    });
     items.push({
       type: ITEM_TYPE_LAYER,
       data: layer
     });
     items.sort(basketSort);
-  };
-
-  removeLayer = function () {
-    items.remove(function (item) {
-      return item.type === ITEM_TYPE_LAYER;
-    });
   };
 
   addTopping = function (topping) {
@@ -106,10 +96,6 @@ define(["knockout", "utils"], function (ko, utils) {
       data: topping
     });
     items.sort(basketSort);
-  };
-
-  removeTopping = function (toppingId) {
-    return removeLastItem(ITEM_TYPE_TOPPING, toppingId);
   };
 
   cloneItem = function (item) {
@@ -162,16 +148,10 @@ define(["knockout", "utils"], function (ko, utils) {
     isCrazy: isCrazy,
     reset: reset,
     addPizza: addPizza,
-    removePizza: removePizza,
     addLayer: addLayer,
-    removeLayer: removeLayer,
     addTopping: addTopping,
-    removeTopping: removeTopping,
     cloneItem: cloneItem,
-    removeItem: removeItem,
-    ITEM_TYPE_PIZZA: ITEM_TYPE_PIZZA,
-    ITEM_TYPE_LAYER: ITEM_TYPE_LAYER,
-    ITEM_TYPE_TOPPING: ITEM_TYPE_TOPPING
+    removeItem: removeItem
   };
 
 });
