@@ -4,11 +4,13 @@ define(["squire", "q"], function (Squire, Q) {
     var selectLayerPage,
         basket,
         dataServiceMock,
+        navigationServiceMock,
         squire,
         async = new AsyncSpec(this);
    
     async.beforeEach(function (done) {
       dataServiceMock = jasmine.createSpyObj("dataService", ["getLayers"]);
+      navigationServiceMock = jasmine.createSpyObj("navigationService", ["navigateTo"]);
       dataServiceMock.getLayers.andReturn(Q.when([]));
 
       squire = new Squire();
@@ -16,10 +18,24 @@ define(["squire", "q"], function (Squire, Q) {
         return dataServiceMock;
       });
       
+      squire.mock("navigationService", function () {
+        return navigationServiceMock;
+      });
+
       squire.require(["selectLayerPage", "basketSection"], function (page, basketSection) {
         selectLayerPage = page;
         basket = basketSection;
         done();
+      });
+    });
+
+    describe("When goToSelectToppings is executed", function () {
+      beforeEach(function () {
+        selectLayerPage.goToSelectToppings();
+      });
+
+      it("Should navigate to the ingredients page", function () {
+        expect(navigationServiceMock.navigateTo).toHaveBeenCalledWith ("#/crazy/ingredients");
       });
     });
 

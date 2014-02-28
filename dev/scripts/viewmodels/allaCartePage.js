@@ -1,4 +1,4 @@
-define(["knockout", "dataService", "basketSection"], function (ko, dataService, basket) {
+define(["knockout", "dataService", "basketSection", "navigationService"], function (ko, dataService, basket, navigationService) {
 
   var viewModel = {
     initialize: function () {
@@ -23,7 +23,7 @@ define(["knockout", "dataService", "basketSection"], function (ko, dataService, 
   };
 
   viewModel.goToCheckout = function () {
-    window.location.href = "#/checkout";
+    navigationService.navigateTo("#/checkout");
   };
 
   if (viewModel.isEmpty()) {

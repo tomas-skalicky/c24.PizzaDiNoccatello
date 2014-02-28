@@ -4,11 +4,13 @@ define(["squire", "q"], function (Squire, Q) {
     var selectToppingsPage,
         basket,
         dataServiceMock,
+        navigationServiceMock,
         squire,
         async = new AsyncSpec(this);
    
     async.beforeEach(function (done) {
       dataServiceMock = jasmine.createSpyObj("dataService", ["getIngredients"]);
+      navigationServiceMock = jasmine.createSpyObj("navigationService", ["navigateTo"]);
       dataServiceMock.getIngredients.andReturn(Q.when([]));
 
       squire = new Squire();
@@ -16,11 +18,26 @@ define(["squire", "q"], function (Squire, Q) {
         return dataServiceMock;
       });
       
+      squire.mock("navigationService", function () {
+        return navigationServiceMock;
+      });
+
       squire.require(["selectToppingsPage", "basketSection"], function (page, basketSection) {
         selectToppingsPage = page;
         basket = basketSection;
         done();
       });
+    });
+
+    describe("When goToCheckout is executed", function () {
+      beforeEach(function () {
+        selectToppingsPage.goToCheckout();
+      });
+
+      it ("should navigate to the checkout page", function () {
+        expect(navigationServiceMock.navigateTo).toHaveBeenCalledWith("#/checkout");
+      });
+
     });
 
     describe("When the list for toppings is empty", function () {

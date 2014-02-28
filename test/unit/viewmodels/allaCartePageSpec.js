@@ -7,25 +7,42 @@ define(["squire", "q"], function (Squire, Q) {
       describe("when the basket is in crazy mode", function () {
 
         var async = new AsyncSpec(this),
+            navigateToSpy = jasmine.createSpy("navigateToSpy"),
+            navigationServiceMock = {
+              navigateTo: navigateToSpy
+            },
             resetSpy = jasmine.createSpy("resetSpy"),
             basketMock = {
               isCrazy: function () {
                 return true;
               },
               reset: resetSpy
-            };
+            },
+            allaCartePageViewModel;
 
         async.beforeEach(function (done) {
           new Squire()
             .mock("basketSection", basketMock)
+            .mock("navigationService", navigationServiceMock)
             .require(["allaCartePage"], function (menu) {
-              menu.initialize();
+              allaCartePageViewModel = menu;
+              allaCartePageViewModel.initialize();
               done();
             });
         });
 
         it ("should reset the basket", function () {
           expect(resetSpy).toHaveBeenCalled();
+        });
+
+        describe("When goToCheckout is executed", function () {
+          beforeEach(function () {
+            allaCartePageViewModel.goToCheckout();
+          });
+
+          it ("should call the navigateTo function from the navigationService", function () {
+            expect(navigateToSpy).toHaveBeenCalled();
+          });
         });
 
       });
