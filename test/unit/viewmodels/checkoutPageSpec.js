@@ -3,7 +3,9 @@ define(["squire"], function (Squire) {
   describe("Checkout view model", function () {
     var async = new AsyncSpec(this),
         emptyBasket = { isEmpty: function () { return true; } },
-        nonEmptyBasket = { isEmpty: function () { return false; } },
+        nonEmptyBasket = { isEmpty: function () { return false; }, 
+                           reset: function () {}
+                        },
         setNameAndAddress = function (checkout) {
           checkout.name("Giaccomo Renaldo");
           checkout.street("Via della Batteria 2");
@@ -63,15 +65,24 @@ define(["squire"], function (Squire) {
     });
 
     describe("when the order is confirmed", function () {
-      async.it("should 'isClosed' to 'true'", function (done) {
+      var basketSpy,
+          checkoutPage;
+      async.beforeEach(function (done) {
+        basketSpy = spyOn(nonEmptyBasket, "reset");
         new Squire()
           .mock("basketSection", nonEmptyBasket)
           .require(["checkoutPage"], function (checkout) {
+            checkoutPage = checkout;
             setNameAndAddress(checkout);
             checkout.confirm();
-            expect(checkout.isClosed()).toBe(true);
             done();
           });
+      });
+      it("should 'isClosed' to 'true'", function (done) {
+            expect(checkoutPage.isClosed()).toBe(true);
+      });
+      it("should reset the basket when checkout is completed", function () {
+          expect(nonEmptyBasket.reset).toHaveBeenCalled(); 
       });
     });
 

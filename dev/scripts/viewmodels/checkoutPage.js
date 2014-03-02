@@ -18,6 +18,7 @@ define(["knockout", "basketSection"], function (ko, basket) {
 
   viewModel.confirm = function () {
       viewModel.isClosed(true);
+      basket.reset();
   };
 
   return viewModel;
