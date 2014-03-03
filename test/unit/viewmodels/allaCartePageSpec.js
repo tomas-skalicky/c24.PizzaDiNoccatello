@@ -11,7 +11,7 @@ define(["squire", "q"], function (Squire, Q) {
             navigationServiceMock = {
               navigateTo: navigateToSpy
             },
-            resetSpy = jasmine.createSpy("resetSpy"),
+            resetSpy   = jasmine.createSpy("resetSpy"),
             basketMock = {
               isCrazy: function () {
                 return true;
@@ -22,9 +22,9 @@ define(["squire", "q"], function (Squire, Q) {
 
         async.beforeEach(function (done) {
           new Squire()
-            .mock("basketSection", basketMock)
-            .mock("navigationService", navigationServiceMock)
-            .require(["allaCartePage"], function (menu) {
+            .mock("basketSection"      , basketMock)
+            .mock("navigationService"  , navigationServiceMock)
+            .require(["allaCartePage"] , function (menu) {
               allaCartePageViewModel = menu;
               allaCartePageViewModel.initialize();
               done();
@@ -67,7 +67,7 @@ define(["squire", "q"], function (Squire, Q) {
           
           squire.require(["allaCartePage", "basketSection"], function (page, basketSection) {
               allaCartePage = page;
-              basket = basketSection;
+              basket        = basketSection;
               done();
           });
       });

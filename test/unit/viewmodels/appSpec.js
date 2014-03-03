@@ -9,13 +9,13 @@ define(["squire"], function (Squire) {
 
       beforeEach(function () {
         navigationServiceFake = (function () {
-          var isStarted = false,
-          currentPath = "",
-          listeners = [],
-          addListener = function (listener) {
+            var isStarted       = false,
+            currentPath         = "",
+            listeners           = [],
+            addListener         = function (listener) {
             listeners.push(listener);
             if (isStarted) {
-              listener(currentPath);
+                listener(currentPath);
             }
           },
           startListening = function () {
@@ -34,9 +34,9 @@ define(["squire"], function (Squire) {
             }
           };
           return {
-            addListener: addListener,
-            startListening: startListening,
-            navigateTo: navigateTo
+            addListener    : addListener,
+            startListening : startListening,
+            navigateTo     : navigateTo
           };
         })();
       });

@@ -5,12 +5,12 @@ define(["module", "knockout", "window", "navigationService", "knockout-amd-helpe
 
   // Mapping path -> module:
   var routes = {
-    ""                 : "homePage",
-    "crazy/layers"     : "selectLayerPage",
-    "crazy/ingredients": "selectToppingsPage",
-    "allacarte"        : "allaCartePage",
-    "checkout"         : "checkoutPage",
-    "*"                : "notfoundPage" // fallback route!
+    ""                  : "homePage",
+    "crazy/layers"      : "selectLayerPage",
+    "crazy/ingredients" : "selectToppingsPage",
+    "allacarte"         : "allaCartePage",
+    "checkout"          : "checkoutPage",
+    "*"                 : "notfoundPage" // fallback route!
   };
 
   var app = {

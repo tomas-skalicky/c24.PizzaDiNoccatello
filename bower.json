@@ -1,12 +1,12 @@
 {
-  "name": "Pizza-Di-Nocatello",
-  "dependencies": {
-    "requirejs": "~2.1.9",
-    "knockout.js": "~3.0.0",
-    "knockout-amd-helpers": "~0.5.2",
-    "text": "~2.0.10",
-    "pajamas": "~1.6.1",
-    "q": "#0.9.3"
+  "name"             : "Pizza-Di-Nocatello",
+  "dependencies"     : {
+    "requirejs"            : "~2.1.9",
+    "knockout.js"          : "~3.0.0",
+    "knockout-amd-helpers" : "~0.5.2",
+    "text"                 : "~2.0.10",
+    "pajamas"              : "~1.6.1",
+    "q"                    : "#0.9.3"
   },
   "devDependencies": {
     "jasmine.async": "~0.1.0",

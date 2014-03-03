@@ -1,11 +1,11 @@
 define(["squire"], function (Squire) {
 
   describe("Checkout view model", function () {
-    var async = new AsyncSpec(this),
-        emptyBasket = { isEmpty: function () { return true; } },
-        nonEmptyBasket = { isEmpty: function () { return false; }, 
+    var async          = new AsyncSpec(this),
+        emptyBasket    = { isEmpty: function () { return true; } },
+        nonEmptyBasket = { isEmpty: function () { return false; },
                            reset: function () {}
-                        },
+                         },
         setNameAndAddress = function (checkout) {
           checkout.name("Giaccomo Renaldo");
           checkout.street("Via della Batteria 2");
@@ -78,12 +78,15 @@ define(["squire"], function (Squire) {
             done();
           });
       });
+
       it("should 'isClosed' to 'true'", function (done) {
             expect(checkoutPage.isClosed()).toBe(true);
       });
+
       it("should reset the basket when checkout is completed", function () {
           expect(nonEmptyBasket.reset).toHaveBeenCalled(); 
       });
+      
     });
 
   });

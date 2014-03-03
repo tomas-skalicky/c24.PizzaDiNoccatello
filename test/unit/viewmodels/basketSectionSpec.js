@@ -30,9 +30,9 @@ define(["basketSection"], function (basket) {
 
     describe("when pizzas have been inserted", function () {
       beforeEach(function () {
-        basket.addPizza({ id: "pqs", name: "Quattro Stagioni", price: 8.5 });
-        basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
-        basket.addPizza({ id: "ps", name: "Salame", price: 8 });
+        basket.addPizza({ id : "pqs" , name : "Quattro Stagioni" , price : 8.5 });
+        basket.addPizza({ id : "pm"  , name : "Margarita"       , price  : 7 });
+        basket.addPizza({ id : "ps"  , name : "Salame"          , price  : 8 });
       });
       it("should not be empty", function () {
         expect(basket.isEmpty()).toBe(false);
@@ -96,9 +96,9 @@ define(["basketSection"], function (basket) {
 
     describe("when toppings have been inserted", function () {
       beforeEach(function () {
-        basket.addTopping({ id: "tt", name: "Tomatoes", price: 1.5 });
-        basket.addTopping({ id: "ts", name: "Salame", price: 2.5 });
-        basket.addTopping({ id: "tm", name: "Mozzarella", price: 3 });
+        basket.addTopping({ id : "tt" , name : "Tomatoes"   , price : 1.5 });
+        basket.addTopping({ id : "ts" , name : "Salame"     , price : 2.5 });
+        basket.addTopping({ id : "tm" , name : "Mozzarella" , price : 3 });
       });
       it("should not be empty", function () {
         expect(basket.isEmpty()).toBe(false);
@@ -129,9 +129,9 @@ define(["basketSection"], function (basket) {
 
     describe("when it is in 'à la carte' mode (contains pizzas)", function () {
       beforeEach(function () {
-        basket.addPizza({ id: "pqs", name: "Quattro Stagioni", price: 8.5 });
-        basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
-        basket.addPizza({ id: "ps", name: "Salame", price: 8 });
+        basket.addPizza({ id : "pqs" , name : "Quattro Stagioni" , price : 8.5 });
+        basket.addPizza({ id : "pm"  , name : "Margarita"        , price : 7 });
+        basket.addPizza({ id : "ps"  , name : "Salame"           , price : 8 });
       });
       it("should switch to 'crazy' mode and drop all pizzas when inserting a layer", function () {
         basket.addLayer({ id: "dw", name: "Wheat", price: 2.5 });
@@ -147,10 +147,10 @@ define(["basketSection"], function (basket) {
 
     describe("when it is in 'crazy' mode (contains layer and toppings)", function () {
       beforeEach(function () {
-        basket.addLayer({ id: "dw", name: "Wheat", price: 2.5 });
-        basket.addTopping({ id: "tt", name: "Tomatoes", price: 1.5 });
-        basket.addTopping({ id: "ts", name: "Salame", price: 2.5 });
-        basket.addTopping({ id: "tm", name: "Mozzarella", price: 3 });
+        basket.addLayer({ id   : "dw" , name : "Wheat"      , price   : 2.5 });
+        basket.addTopping({ id : "tt" , name : "Tomatoes"   , price   : 1.5 });
+        basket.addTopping({ id : "ts" , name : "Salame"     , price   : 2.5 });
+        basket.addTopping({ id : "tm" , name : "Mozzarella" , price   : 3 });
       });
       it("should switch to 'à la carte' mode and drop all layer/toppings when inserting a pizza", function () {
         basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
@@ -172,8 +172,8 @@ define(["basketSection"], function (basket) {
 
     describe("When 'cloneItem' has been called", function () {
       it("should add a clone of the provided item", function () {
-        basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
-        basket.addPizza({ id: "ps", name: "Salame", price: 8 });
+        basket.addPizza({ id: "pm" , name: "Margarita" , price: 7 });
+        basket.addPizza({ id: "ps" , name: "Salame"    , price: 8 });
         basket.cloneItem(basket.items()[0]);
         expect(basket.items()[0].data.name).toBe("Margarita");
         expect(basket.items()[1].data.name).toBe("Margarita");
@@ -183,9 +183,9 @@ define(["basketSection"], function (basket) {
 
     describe("When 'removeItem' has been called", function () {
       it("should remove the provided item", function () {
-        basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
-        basket.addPizza({ id: "pm", name: "Margarita", price: 7 });
-        basket.addPizza({ id: "ps", name: "Salame", price: 8 });
+        basket.addPizza({ id : "pm" , name : "Margarita" , price : 7 });
+        basket.addPizza({ id : "pm" , name : "Margarita" , price : 7 });
+        basket.addPizza({ id : "ps" , name : "Salame"    , price : 8 });
         basket.removeItem(basket.items()[0]);
         expect(basket.items()[0].data.name).toBe("Margarita");
         expect(basket.items()[1].data.name).toBe("Salame");

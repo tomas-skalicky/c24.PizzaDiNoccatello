@@ -2,19 +2,19 @@ define(["squire"], function (Squire) {
 
   describe("navigationService", function () {
 
-    var async = new AsyncSpec(this),
+    var async      = new AsyncSpec(this),
         windowFake = null;
 
     beforeEach(function () {
       windowFake = {
-        location: {
-          href: "http://pizza-di-noccatello.it/online-trattoria/#/home",
-          protocol: "http:",
-          host: "pizza-di-noccatello.it",
-          pathname: "/online-trattoria/",
-          search: "",
-          hash: "#/crazy/layers",
-          replace: function (newHref) {
+        location   : {
+          href     : "http://pizza-di-noccatello.it/online-trattoria/#/home",
+          protocol : "http:",
+          host     : "pizza-di-noccatello.it",
+          pathname : "/online-trattoria/",
+          search   : "",
+          hash     : "#/crazy/layers",
+          replace  : function (newHref) {
             windowFake.location.href = newHref;
           }
         },

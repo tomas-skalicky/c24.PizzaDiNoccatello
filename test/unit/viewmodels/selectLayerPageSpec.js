@@ -9,7 +9,7 @@ define(["squire", "q"], function (Squire, Q) {
         async = new AsyncSpec(this);
    
     async.beforeEach(function (done) {
-      dataServiceMock = jasmine.createSpyObj("dataService", ["getLayers"]);
+      dataServiceMock       = jasmine.createSpyObj("dataService", ["getLayers"]);
       navigationServiceMock = jasmine.createSpyObj("navigationService", ["navigateTo"]);
       dataServiceMock.getLayers.andReturn(Q.when([]));
 
@@ -24,7 +24,7 @@ define(["squire", "q"], function (Squire, Q) {
 
       squire.require(["selectLayerPage", "basketSection"], function (page, basketSection) {
         selectLayerPage = page;
-        basket = basketSection;
+        basket          = basketSection;
         done();
       });
     });

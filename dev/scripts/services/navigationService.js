@@ -47,11 +47,11 @@ define(["window"], function (window) {
       };
 
   return {
-    addListener: addListener,
-    startListening: startListening,
-    getCurrentPath: getCurrentPath,
-    navigateTo: navigateTo,
-    redirectTo: redirectTo
+      addListener    : addListener,
+      startListening : startListening,
+      getCurrentPath : getCurrentPath,
+      navigateTo     : navigateTo,
+      redirectTo     : redirectTo
   };
 
 });

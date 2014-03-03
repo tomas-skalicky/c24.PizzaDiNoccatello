@@ -1,6 +1,6 @@
 var LIVERELOAD_PORT = 35729;
-var lrSnippet = require("connect-livereload")({port: LIVERELOAD_PORT});
-var mountFolder = function (connect, dir) {
+var lrSnippet       = require("connect-livereload")({port: LIVERELOAD_PORT});
+var mountFolder     = function (connect, dir) {
   return connect.static(require("path").resolve(dir));
 };
 
@@ -53,14 +53,14 @@ module.exports = function (grunt) {
       dist: {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         options: {
-          include: ["app", "homePage", "allaCartePage", "selectLayerPage", "selectToppingsPage", "checkoutPage", "notfoundPage"],
-          insertRequire: ["app"],
-          mainConfigFile: "main.dist.js",
-          out: "dist/main.js",
-          optimize: "none", // possible values: "uglify" (default), "uglify2" or "none"
-          preserveLicenseComments: false,
-          useStrict: true,
-          wrap: false
+          include                 : ["app", "homePage", "allaCartePage", "selectLayerPage", "selectToppingsPage", "checkoutPage", "notfoundPage"],
+          insertRequire           : ["app"],
+          mainConfigFile          : "main.dist.js",
+          out                     : "dist/main.js",
+          optimize                : "none", // possible values                                                                                     : "uglify" (default), "uglify2" or "none"
+          preserveLicenseComments : false,
+          useStrict               : true,
+          wrap                    : false
         }
       }
     },
@@ -83,8 +83,8 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          port: 8080,
-          middleware: function (connect) {
+          port       : 8080,
+          middleware : function (connect) {
             return [mountFolder(connect, "dev"), lrSnippet];
           }
         }
@@ -115,19 +115,19 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [{
-          cwd: "dev/templates/",
-          src: "**",
-          dest: "dist/templates/",
-          filter: "isFile",
-          expand: true,
-          nonull: true
+          cwd    : "dev/templates/",
+          src    : "**",
+          dest   : "dist/templates/",
+          filter : "isFile",
+          expand : true,
+          nonull : true
         }, {
-          cwd: "dev/styles/",
-          src: "**",
-          dest: "dist/styles/",
-          filter: "isFile",
-          expand: true,
-          nonull: true
+          cwd    : "dev/styles/",
+          src    : "**",
+          dest   : "dist/styles/",
+          filter : "isFile",
+          expand : true,
+          nonull : true
         }, {
           src: "dev/index.html",
           dest: "dist/index.html"
