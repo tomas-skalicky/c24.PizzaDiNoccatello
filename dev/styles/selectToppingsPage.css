@@ -28,6 +28,6 @@
     padding: 5px 0;
 }
 
-.selectToppingsPage p {
+.selectToppingsPage p.error {
   color: red;
 }
