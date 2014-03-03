@@ -24,7 +24,7 @@ define(["squire", "q"], function (Squire, Q) {
       });
 
       afterEach(function () {
-        pjSpy = null;
+        pjSpy  = null;
         pizzas = null;
       });
  
@@ -35,22 +35,24 @@ define(["squire", "q"], function (Squire, Q) {
       it("should contain at least one item", function () {
         expect(pizzas.length).toBeGreaterThan(0);
       });
- 
-      async.it("should not call the REST service another time if called repeatedly", function (done) {
-        // call it a second time...
-        dataService.getPizzas().done(function (result) {
-          expect(pjSpy.calls.length).toBe(1); // the ajax mock should have been called just once.
-          done();
+      
+      describe("When 'getPizzas' is called a second time", function() {
+          async.it("should not call the REST service another time if called repeatedly", function (done) {
+            dataService.getPizzas().done(function (result) {
+              expect(pjSpy.calls.length).toBe(1); 
+              done();
+            });
+          });
+      }); 
+
+      describe("When 'getPizzas' is called several times", function () {
+        async.it("should return cached items if called repeatedly", function (done) {
+          dataService.getPizzas().done(function (result) {
+            expect(result).toBe(pizzas); 
+            done();
+          });
         });
-      });
- 
-      async.it("should return cached items if called repeatedly", function (done) {
-        // call it a second time...
-        dataService.getPizzas().done(function (result) {
-          expect(result).toEqual(pizzas); // the result should be the pizza array from the first call.
-          done();
-        });
-      });
+      }); 
 
     });
 

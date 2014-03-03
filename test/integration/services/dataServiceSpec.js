@@ -18,16 +18,16 @@ define(["dataService", "q"], function (dataService, Q) {
 
       afterEach(function () {
         failCallback = null;
-        pizzas = null;
+        pizzas       = null;
       });
  
       it("should return an array", function () {
-        expect(failCallback).not.toHaveBeenCalled(); // Prerequisite!
+        expect(failCallback).not.toHaveBeenCalled(); 
         expect(Array.isArray(pizzas)).toBe(true);
       });
  
       it("should contain at least one item", function () {
-        expect(failCallback).not.toHaveBeenCalled(); // Prerequisite!
+        expect(failCallback).not.toHaveBeenCalled(); 
         expect(pizzas.length).toBeGreaterThan(0);
       });
 

@@ -9,6 +9,7 @@ define(["knockout", "utils"], function (ko, utils) {
       isCrazy,
       reset,
       addPizza,
+      removeAllLayers,
       addLayer,
       addTopping,
       cloneItem,
@@ -16,8 +17,8 @@ define(["knockout", "utils"], function (ko, utils) {
       basketSort,
       hasItem,
       removeLastItem,
-      ITEM_TYPE_PIZZA = 0,
-      ITEM_TYPE_LAYER = 1,
+      ITEM_TYPE_PIZZA   = 0,
+      ITEM_TYPE_LAYER   = 1,
       ITEM_TYPE_TOPPING = 2;
 
   items = ko.observableArray([]);
@@ -69,18 +70,24 @@ define(["knockout", "utils"], function (ko, utils) {
     items.sort(basketSort);
   };
 
+  removeAllLayers = function () {
+    items.remove(function (item) {
+      return item.type === ITEM_TYPE_LAYER;
+    });
+  };
+
   addLayer = function (layer) {
     if (hasPizzas()) {
       reset();
     }
-    // There can be only one!
-    items.remove(function (item) {
-      return item.type === ITEM_TYPE_LAYER;
-    });
+
+    removeAllLayers();
+
     items.push({
       type: ITEM_TYPE_LAYER,
       data: layer
     });
+
     items.sort(basketSort);
   };
 
@@ -139,19 +146,19 @@ define(["knockout", "utils"], function (ko, utils) {
 
   // Public API:
   return {
-    items: items,
-    total: total,
-    isEmpty: isEmpty,
-    hasPizzas: hasPizzas,
-    hasLayer: hasLayer,
-    hasToppings: hasToppings,
-    isCrazy: isCrazy,
-    reset: reset,
-    addPizza: addPizza,
-    addLayer: addLayer,
-    addTopping: addTopping,
-    cloneItem: cloneItem,
-    removeItem: removeItem
+    items       : items,
+    total       : total,
+    isEmpty     : isEmpty,
+    hasPizzas   : hasPizzas,
+    hasLayer    : hasLayer,
+    hasToppings : hasToppings,
+    isCrazy     : isCrazy,
+    reset       : reset,
+    addPizza    : addPizza,
+    addLayer    : addLayer,
+    addTopping  : addTopping,
+    cloneItem   : cloneItem,
+    removeItem  : removeItem
   };
 
 });
