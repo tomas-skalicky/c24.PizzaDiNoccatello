@@ -1,6 +1,6 @@
 define(["pajamas", "q"], function (pj, Q) {
 
-  var baseUri = "http://localhost:3000/api/",
+  var baseUri = "http://c24-pizzaexpress.herokuapp.com/api/",
       cache = {};
       
   function getOrSetCachedItem (key, createFunc) {
