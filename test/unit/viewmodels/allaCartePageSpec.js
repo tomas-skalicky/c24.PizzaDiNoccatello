@@ -1,4 +1,4 @@
-define(["squire", "q"], function (Squire, Q) {
+define(["knockout", "squire", "q"], function (ko, Squire, Q) {
 
   describe("Menu", function () {
 
@@ -125,6 +125,149 @@ define(["squire", "q"], function (Squire, Q) {
         });
       });
 
+    });
+
+
+    describe('When calling getPageCount', function () {
+      var squire,
+        allaCartePageViewModel,
+        async = new AsyncSpec(this),
+        dataServiceMock = jasmine.createSpyObj("dataService", ["getPizzas"]),
+        resetSpy   = jasmine.createSpy("resetSpy"),
+        basketMock = {
+          isCrazy: function () {
+            return true;
+          },
+          reset: resetSpy
+        },
+        pizzas =  [
+          { id: 1, name: 'Thin Crust 1' }
+        ];
+
+      async.beforeEach(function(done) {
+        dataServiceMock.getPizzas.andReturn(Q.when(pizzas));
+
+        squire = new Squire()
+        .mock("dataService"        , dataServiceMock)
+        .mock("basketSection"      , basketMock)
+        .mock("navigationService"  , {})
+        .require(["allaCartePage"] , function (menu) {
+          allaCartePageViewModel = menu;
+          allaCartePageViewModel.initialize();
+          done();
+        });
+      });
+
+      describe('without any pizzas', function () {
+        it('should return 1 page', function () {
+          allaCartePageViewModel.items([]);
+
+          expect(allaCartePageViewModel.pageCount()).toBe(1);
+        });
+      });
+
+      describe('with one pizza', function () {
+        it('should return 1 page', function () {
+          expect(allaCartePageViewModel.pageCount()).toBe(1);
+        });
+      });
+
+      describe('with 3 pizzas and pizzasPerPage equal 2', function () {
+        it('should return 2 pages', function () {
+          allaCartePageViewModel.pizzasPerPage = 2;
+          allaCartePageViewModel.items([
+            { id: 1, name: 'Thin Crust 1' },
+            { id: 2, name: 'Thin Crust 2' },
+            { id: 3, name: 'Thin Crust 3' }
+          ]);
+          expect(allaCartePageViewModel.pageCount()).toBe(2);
+        });
+      });
+    });
+
+    describe('When a User wants to select a page', function () {
+
+      var squire,
+        allaCartePageViewModel,
+        async = new AsyncSpec(this),
+        dataServiceMock = jasmine.createSpyObj("dataService", ["getPizzas"]),
+        resetSpy   = jasmine.createSpy("resetSpy"),
+        basketMock = {
+          isCrazy: function () {
+            return true;
+          },
+          reset: resetSpy
+        },
+        pizzas = [
+          { id: 1, name: 'Thin Crust 1' },
+          { id: 2, name: 'Thin Crust 2' },
+          { id: 3, name: 'Thin Crust 3' }
+        ],
+        filteredItems = ko.computed(function () { return pizzas; }),
+        pageCountWasCalled;
+
+      async.beforeEach(function(done) {
+        dataServiceMock.getPizzas.andReturn(Q.when(pizzas));
+        pageCountWasCalled = false;
+
+        squire = new Squire()
+          .mock("dataService"        , dataServiceMock)
+          .mock("basketSection"      , basketMock)
+          .mock("navigationService"  , {})
+          .require(["allaCartePage"] , function (menu) {
+            allaCartePageViewModel = menu;
+            allaCartePageViewModel.initialize();
+            allaCartePageViewModel.pizzasPerPage = 2;
+            allaCartePageViewModel.pageCount = ko.computed(function() {
+              pageCountWasCalled = true;
+              return 2;
+            });
+            done();
+          });
+      });
+
+      describe('selecting page 1', function () {
+        it('currentPizzasList should contain the first two pizzas', function () {
+          allaCartePageViewModel.currentPageIndex(0);
+          expect(allaCartePageViewModel.currentPageIndex()).toBe(0);
+          expect(filteredItems()[0].name).toBe('Thin Crust 1');
+
+          expect(allaCartePageViewModel.currentPizzas()[0]).toEqual(filteredItems()[0]);
+          expect(allaCartePageViewModel.currentPizzas()[1]).toEqual(filteredItems()[1]);
+          expect(allaCartePageViewModel.currentPizzas().length).toBe(2);
+
+          expect(pageCountWasCalled).toBe(true);
+        });
+      });
+
+      describe('selecting page 2', function () {
+        it('currentPizzasList should contain the last pizza', function () {
+          allaCartePageViewModel.currentPageIndex(1);
+
+          expect(allaCartePageViewModel.currentPageIndex()).toBe(1);
+
+          expect(allaCartePageViewModel.currentPizzas()[0]).toEqual(filteredItems()[2]);
+          expect(allaCartePageViewModel.currentPizzas().length).toBe(1);
+
+          expect(pageCountWasCalled).toBe(true);
+
+
+
+        });
+      });
+
+      describe('selecting page 3', function () {
+        it('currentPizzasList should contain the same pizzas like page 1', function () {
+          allaCartePageViewModel.currentPageIndex(2);
+          expect(allaCartePageViewModel.currentPageIndex()).toBe(0);
+
+          expect(allaCartePageViewModel.currentPizzas()[0]).toEqual(filteredItems()[0]);
+          expect(allaCartePageViewModel.currentPizzas()[1]).toEqual(filteredItems()[1]);
+          expect(allaCartePageViewModel.currentPizzas().length).toBe(2);
+
+          expect(pageCountWasCalled).toBe(true);
+        });
+      });
     });
 
   });
